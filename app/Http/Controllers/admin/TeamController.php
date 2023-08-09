@@ -15,3 +15,6 @@ class TeamController extends Controller
         return view('admin.pages.team.index', ['team' => $team]);
     }
 }
+
+
+
