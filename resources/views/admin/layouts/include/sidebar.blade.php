@@ -26,10 +26,16 @@
                 <li class="pc-item {{ request()->routeIs('admin.user.index') ? 'active' : '' }}">
                     <a href="{{route('admin.user.index')}}" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-users"></i></span>
-                        <span class="pc-mtext">User</span>
+                        <span class="pc-mtext">Users</span>
                     </a>
                 </li>
 
+                <li class="pc-item {{ request()->routeIs('admin.team.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.team.index')}}" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-ball-football"></i></span>
+                        <span class="pc-mtext">Teams</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

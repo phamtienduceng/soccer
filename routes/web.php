@@ -31,6 +31,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('', [TeamController::class, 'index'])->name('index');
 
+            Route::get('/create', [TeamController::class, 'add'])->name('add');
+            
+            Route::post('/create', [TeamController::class, 'store'])->name('store');
+
+
         });
     });
 });
