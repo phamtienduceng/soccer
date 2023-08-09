@@ -26,11 +26,11 @@
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="user_email">
+                        <input type="email" class="form-control" style="color: black" name="user_email">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="user_password">
+                        <label for="exampleInputPassword1"  class="form-label">Password</label>
+                        <input type="password" class="form-control" style="color: black" name="user_password">
                     </div>
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>

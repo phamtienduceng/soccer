@@ -76,3 +76,6 @@ class TeamController extends Controller
         return redirect()->route('admin.team.index')->with('success', 'Team updated successfully!');
     }
 }
+
+
+

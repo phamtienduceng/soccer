@@ -20,12 +20,15 @@
             <div class="ml-auto">
                 <nav class="site-navigation position-relative text-right" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li class="active"><a href="" class="nav-link">Home</a></li>
-                        <li><a href="" class="nav-link">Matches</a></li>
-                        <li><a href="" class="nav-link">Players</a></li>
-                        <li><a href="" class="nav-link">Blog</a></li>
-                        <li><a href="" class="nav-link">Contact</a></li>
+                        <li><a href="{{ Route('ui.index')}}" class="nav-link">Home</a></li>
+                        <li><a href="{{ Route('ui.matches')}}" class="nav-link">Matches</a></li>
+                        <li><a href="{{ Route('ui.players')}}" class="nav-link">Players</a></li>
+                        <li><a href="{{ Route('ui.contact')}}" class="nav-link">Shop</a></li>
+                        <li><a href="{{ Route('ui.blog')}}" class="nav-link">Blog</a></li>
+                        <li><a href="{{ Route('ui.contact')}}" class="nav-link">Contact</a></li>
+                        <li><a href="{{ Route('ui.AuthForm')}}" class="nav-link">User</a></li>
                     </ul>
+
                 </nav>
 
                 <a href="#"

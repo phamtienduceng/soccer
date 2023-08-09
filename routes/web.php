@@ -45,6 +45,14 @@ Route::name('ui.')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
 
+    Route::get('/matches', [HomeController::class, 'matches'])->name('matches');
+
+    Route::get('/players', [HomeController::class, 'players'])->name('players');
+
+    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
     Route::get('/login', [HomeController::class, 'AuthForm'])->name('AuthForm');
 
     Route::post('/login', [HomeController::class, 'AuthPost'])->name('AuthPost');
