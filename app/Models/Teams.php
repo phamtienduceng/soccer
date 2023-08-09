@@ -15,21 +15,10 @@ class Teams extends Model
 
     protected $fillable = [
         'team_name',
-        'tournament_id',
-        'win',
-        'draw',
-        'lose',
-        'points',
-        'country'=>'England',
+        'isPremierLeague',
+        'isFA',
+        'isCommunityShield',
         'logo'
-    ];
-
-    protected $casts = [
-        'team_id' => 'integer',
-        'win' => 'integer',
-        'draw' => 'integer',
-        'lose' => 'integer',
-        'points' => 'integer'
     ];
 
     public $timestamps = true;

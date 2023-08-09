@@ -14,13 +14,9 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id('team_id');
             $table->string('team_name');
-            $table->bigInteger('tournament_id')->unsigned();
-            $table->foreign('tournament_id')->references('tournament_id')->on('tournaments');
-            $table->integer('win')->default(0);
-            $table->integer('draw')->default(0);
-            $table->integer('lose')->default(0);
-            $table->integer('points')->default(0);
-            $table->string('country')->default('England');
+            $table->enum('isPremierLeague', ['Active', 'Inactive'])->default('Inactive');
+            $table->enum('isFA', ['Active', 'Inactive'])->default('Inactive');
+            $table->enum('isCommunityShield', ['Active', 'Inactive'])->default('Inactive');
             $table->text('logo')->nullable();
             $table->timestamps();
         });

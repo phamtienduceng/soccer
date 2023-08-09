@@ -23,7 +23,7 @@
 @section('content')
     <div class="pc-content">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title text-center">
@@ -38,79 +38,66 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h5 class="fw-bold">Premier League</h5>
-                    </div>
-                    <div class="card-body">
-                        <table class="table custom-table">
-                            <thead>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table custom-table text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Logo</th>
+                                <th>Name</th>
+                                <th>Premier League</th>
+                                <th>FA</th>
+                                <th>Community Shield</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($teams as $team)
                                 <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Win</th>
-                                    <th>Draw</th>
-                                    <th>Lose</th>
-                                    <th>Points</th>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $team->logo }}</td>
+                                    <td>{{ $team->team_name }}</td>
+                                    <td>
+                                        @if ($team->isPremierLeague == 'Active')
+                                            <i class="ti ti-circle-check" style="font-size: 25px"></i>
+                                        @else
+                                            <i class="ti ti-circle-x" style="font-size: 25px"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($team->isFA == 'Active')
+                                            <i class="ti ti-circle-check" style="font-size: 25px"></i>
+                                        @else
+                                            <i class="ti ti-circle-x" style="font-size: 25px"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($team->isCommunityShield == 'Active')
+                                            <i class="ti ti-circle-check" style="font-size: 25px"></i>
+                                        @else
+                                            <i class="ti ti-circle-x" style="font-size: 25px"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
+                                            data-mdb-target="#update_team">
+                                            <i class="fa-solid fa-gear text-primary"></i>
+                                        </a>
+                                        @include('admin.pages.team.update')
+                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
+                                            data-mdb-target="#del">
+                                            <i class="fa-solid fa-trash text-danger"></i>
+                                        </a>
+                                    </td>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($teams as $team)
-                                    @if ($team->tournament_id == '2')
-                                        <tr>
-                                            <td>1</td>
-                                            <td>{{ $team->team_name }}</td>
-                                            <td>{{ $team->win }}</td>
-                                            <td>{{ $team->draw }}</td>
-                                            <td>{{ $team->lose }}</td>
-                                            <td>{{ $team->points }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <h5 class="fw-bold">FA</h5>
-                    </div>
-                    <div class="card-body">
-                        <table class="table custom-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Win</th>
-                                    <th>Draw</th>
-                                    <th>Lose</th>
-                                    <th>Points</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($teams as $team)
-                                    @if ($team->tournament_id == '1')
-                                        <tr>
-                                            <td>1</td>
-                                            <td>{{ $team->team_name }}</td>
-                                            <td>{{ $team->win }}</td>
-                                            <td>{{ $team->draw }}</td>
-                                            <td>{{ $team->lose }}</td>
-                                            <td>{{ $team->points }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
