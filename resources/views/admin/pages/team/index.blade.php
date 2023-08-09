@@ -23,6 +23,25 @@
 @section('content')
     <div class="pc-content">
         <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title text-center">
+                            New team?
+                            <span>
+                                <a href="{{ route('admin.team.add') }}">
+                                    <span class="pc-micon"><i class="ti ti-circle-plus"></i></span>
+                                    <span class="pc-mtext">Create now</span>
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">
@@ -41,15 +60,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td><strong class="text-white">MC</strong></td>
-                                    <td>22</td>
-                                    <td>3</td>
-                                    <td>2</td>
-                                    <td>2</td>
-                                </tr>
+                                @foreach ($teams as $team)
+                                    @if ($team->tournament_id == '2')
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{ $team->team_name }}</td>
+                                            <td>{{ $team->win }}</td>
+                                            <td>{{ $team->draw }}</td>
+                                            <td>{{ $team->lose }}</td>
+                                            <td>{{ $team->points }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -58,14 +80,36 @@
 
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Inline Text Elements</h5>
+                    <div class="card-header text-center">
+                        <h5 class="fw-bold">FA</h5>
                     </div>
                     <div class="card-body">
-                        <p class="lead m-t-0">Your title goes here</p> You can use the mark tag to <mark>highlight</mark>
-                        text. <br> <del>This line of text is meant to be treated as deleted text.</del> <br> <ins>This line
-                            of text is meant to be treated as an addition to the document.</ins> <br> <strong>rendered as
-                            bold text</strong> <br> <em>rendered as italicized text</em>
+                        <table class="table custom-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Win</th>
+                                    <th>Draw</th>
+                                    <th>Lose</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($teams as $team)
+                                    @if ($team->tournament_id == '1')
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{ $team->team_name }}</td>
+                                            <td>{{ $team->win }}</td>
+                                            <td>{{ $team->draw }}</td>
+                                            <td>{{ $team->lose }}</td>
+                                            <td>{{ $team->points }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

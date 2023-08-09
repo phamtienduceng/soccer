@@ -20,7 +20,7 @@ class Teams extends Model
         'draw',
         'lose',
         'points',
-        'country',
+        'country'=>'England',
         'logo'
     ];
 
@@ -31,4 +31,8 @@ class Teams extends Model
         'lose' => 'integer',
         'points' => 'integer'
     ];
+
+    public $timestamps = true;
+
+    protected $dates = ['created_at', 'updated_at'];
 }
