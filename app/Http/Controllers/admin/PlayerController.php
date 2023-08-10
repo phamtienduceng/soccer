@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Teams;
+use App\Models\Player;
 
 class PlayerController extends Controller
 {
@@ -34,7 +35,10 @@ class PlayerController extends Controller
 
     public function store(Request $request)
     {
+        $teams = session('teams');
+
         $players = $request->all();
+        $players['team_id'] = $request->input('team_id');
         $players['slug'] = \Str::slug($request->title);
 
         if($request->hasFile('photo'))
@@ -48,15 +52,15 @@ class PlayerController extends Controller
                     ->with('error', 'only jpg, png or jpeg');
             }
             $photoName = $file->getClientOriginalName();
-            $file->move('/css/ui/images', $photoName);
+            $file->move('css/ui/images', $photoName);
         }else
         {
             $photoName = null;
         }
 
-        if($request->hasFile('photo'))
+        if($request->hasFile('nationality'))
         {
-            $file = $request -> file('photo');
+            $file = $request -> file('nationality');
             $ext = $file->getClientOriginalExtension();
             if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
             {
@@ -65,7 +69,7 @@ class PlayerController extends Controller
                     ->with('error', 'only jpg, png or jpeg');
             }
             $natName = $file->getClientOriginalName();
-            $file->move('/css/ui/images', $natName);
+            $file->move('css/ui/images', $natName);
         }else
         {
             $natName = null;
@@ -74,7 +78,7 @@ class PlayerController extends Controller
         $players['photo'] = $photoName;
         $players['nationality'] = $natName;
 
-        Product::create($players);
-        return redirect()->route('admin.pages.player.index');
+        Player::create($players);
+        return redirect()->route('admin.player.viewTeamPlayer', ['slug' => $teams->slug]);
     }
 }
