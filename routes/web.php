@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\{DashboardController, UserController, TeamController};
+use App\Http\Controllers\admin\{DashboardController, UserController, TeamController, PlayerController};
 use App\Http\Controllers\ui\{HomeController};
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +36,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/create', [TeamController::class, 'store'])->name('store');
 
             Route::put('/{id}', [TeamController::class, 'update'])->name('update');
+
+        });
+
+        Route::prefix('player')->name('player.')->group(function () {
+
+            Route::get('', [PlayerController::class, 'index'])->name('index');
+
+            Route::get('/club/{slug}', [PlayerController::class, 'viewTeamPlayer'])->name('viewTeamPlayer');
+
+            // Route::get('/create', [TeamController::class, 'add'])->name('add');
+
+            // Route::post('/create', [TeamController::class, 'store'])->name('store');
+
+            // Route::put('/{id}', [TeamController::class, 'update'])->name('update');
 
         });
     });

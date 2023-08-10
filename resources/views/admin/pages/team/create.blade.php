@@ -66,6 +66,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Logo</label>
+                                <div class="col-sm-10">
+                                    <input type="file" id="logo" class="form-control" name="logo">
+                                </div>
+                            </div>
                             <hr>
                             <p class="card-title text-center">
                                 <button type="submit" class="btn btn-link">Create</button>

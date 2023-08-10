@@ -8,11 +8,11 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Team</h5>
+                        <h5 class="m-b-10">Player</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.Dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Team</li>
+                        <li class="breadcrumb-item" aria-current="page">Player</li>
                     </ul>
                 </div>
             </div>
@@ -27,13 +27,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title text-center">
-                            New team?
-                            <span>
-                                <a href="{{ route('admin.team.add') }}">
-                                    <span class="pc-micon"><i class="ti ti-circle-plus"></i></span>
-                                    <span class="pc-mtext">Create now</span>
-                                </a>
-                            </span>
+                            Choose team to view player?
                         </p>
                     </div>
                 </div>
@@ -62,7 +56,9 @@
                                             <img src="{{ asset('/css/ui/images/'.$team->logo)}}" alt="" style="width:50px; height:50px;">
                                         @endif
                                     </td>
-                                    <td>{{ $team->team_name }}</td>
+                                    <td>
+                                        <a href="{{ Route('admin.player.viewTeamPlayer', $team->slug) }}" style="margin-top: -20px">{{ $team->team_name}}</a>
+                                    </td>
                                     <td>
                                         @if ($team->isPremierLeague == 'Active')
                                             <i class="ti ti-circle-check" style="font-size: 25px"></i>
