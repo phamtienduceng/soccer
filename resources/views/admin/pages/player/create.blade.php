@@ -46,14 +46,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Club</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="team_name" disable>
+                                        <input type="text" class="form-control" value="{{ $teams->team_name }}" readonly>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Nationality</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="nationality">
+                                    <input type="file" class="form-control" name="nationality">
                                 </div>
                             </div>
 

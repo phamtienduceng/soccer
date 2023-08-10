@@ -19,7 +19,62 @@ class PlayerController extends Controller
     {
         $team = Teams::where('slug', $slug)->first();
         $teamPlayers = $team->players;
+
+        session(['teams' => $team]);
         
         return view('admin.pages.player.viewTeamPlayer', compact('teamPlayers'));
+    }
+
+    public function add()
+    {
+        $teams = session('teams');
+        $team = Teams::all();
+        return view('admin.pages.player.create', compact('team', 'teams'));
+    }
+
+    public function store(Request $request)
+    {
+        $players = $request->all();
+        $players['slug'] = \Str::slug($request->title);
+
+        if($request->hasFile('photo'))
+        {
+            $file = $request -> file('photo');
+            $ext = $file->getClientOriginalExtension();
+            if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+            {
+                $teams = Teams::all();
+                return view('admin.pages.player.create')
+                    ->with('error', 'only jpg, png or jpeg');
+            }
+            $photoName = $file->getClientOriginalName();
+            $file->move('/css/ui/images', $photoName);
+        }else
+        {
+            $photoName = null;
+        }
+
+        if($request->hasFile('photo'))
+        {
+            $file = $request -> file('photo');
+            $ext = $file->getClientOriginalExtension();
+            if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+            {
+                $teams = Teams::all();
+                return view('admin.pages.player.create')
+                    ->with('error', 'only jpg, png or jpeg');
+            }
+            $natName = $file->getClientOriginalName();
+            $file->move('/css/ui/images', $natName);
+        }else
+        {
+            $natName = null;
+        }
+
+        $players['photo'] = $photoName;
+        $players['nationality'] = $natName;
+
+        Product::create($players);
+        return redirect()->route('admin.pages.player.index');
     }
 }

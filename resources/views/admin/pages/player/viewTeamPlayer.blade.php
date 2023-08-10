@@ -22,6 +22,23 @@
 
 @section('content')
     <div class="pc-content">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title text-center">
+                            Add new player
+                            <span>
+                                <a href="{{ route('admin.player.add') }}">
+                                    <span class="pc-micon"><i class="ti ti-circle-plus"></i></span>
+                                    <span class="pc-mtext">Add now</span>
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">

@@ -85,7 +85,7 @@
                                             data-mdb-target="#update_team">
                                             <i class="fa-solid fa-gear text-primary"></i>
                                         </a>
-                                        @include('admin.pages.team.update')
+
                                         <a type="button" class="btn btn-link" data-mdb-toggle="modal"
                                             data-mdb-target="#del">
                                             <i class="fa-solid fa-trash text-danger"></i>

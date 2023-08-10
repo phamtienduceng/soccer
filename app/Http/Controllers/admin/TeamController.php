@@ -74,6 +74,7 @@ class TeamController extends Controller
 
         return redirect()->route('admin.team.index')->with('success', 'Team created successfully!');
     }
+}
 
     public function update(Request $request, $id)
     {

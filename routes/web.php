@@ -51,9 +51,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('/club/{slug}', [PlayerController::class, 'viewTeamPlayer'])->name('viewTeamPlayer');
 
-            // Route::get('/create', [TeamController::class, 'add'])->name('add');
+            Route::get('/create', [PlayerController::class, 'add'])->name('add');
 
-            // Route::post('/create', [TeamController::class, 'store'])->name('store');
+            Route::post('/create', [PlayerController::class, 'store'])->name('store');
 
             // Route::put('/{id}', [TeamController::class, 'update'])->name('update');
 
