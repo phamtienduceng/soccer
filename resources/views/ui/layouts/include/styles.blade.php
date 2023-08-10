@@ -10,4 +10,4 @@
 <link rel="stylesheet" href="{{asset('css/ui/fonts/icomoon/style.css')}}">
 <link rel="stylesheet" href="{{asset('css/ui/fonts/flaticon/font/flaticon.css')}}">
 <link rel="stylesheet" href="{{asset('css/ui/fonts/flaticon/font/flaticon.css')}}">
-{{-- <link rel="stylesheet" href="{{asset('mdb/css/mdb.min.css')}}"> --}}
+<link rel="stylesheet" href="{{asset('mdb/css/mdb.min.css')}}">

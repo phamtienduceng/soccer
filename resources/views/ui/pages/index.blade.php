@@ -213,12 +213,12 @@
                 <div class="item">
                     <div class="video-media">
                         <img src="{{ asset('css/ui/images/img_1.jpg') }}" alt="Image" class="img-fluid">
-                        <a href="youtube.com/watch?v=E6V0IXyeqG4" class="d-flex play-button align-items-center" data-fancybox>
+                        <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
                             <span class="icon mr-3">
                                 <span class="icon-play"></span>
                             </span>
                             <div class="caption">
-                                <h3 class="m-0">Dogba1 set for Juvendu return?</h3>
+                                <h3 class="m-0">Dogba set for Juvendu return?</h3>
                             </div>
                         </a>
                     </div>
