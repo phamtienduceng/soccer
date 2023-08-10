@@ -15,7 +15,7 @@
     @include('admin.layouts.include.loader')
     @include('admin.layouts.include.navigation')
     @include('admin.layouts.include.sidebar')
-    <main class="pc-container">
+    <main class="pc-container mb-5">
         @yield('content')
     </main>
     @include('admin.layouts.include.scripts')

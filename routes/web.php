@@ -22,9 +22,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('', [UserController::class, 'index'])->name('index');
 
-            Route::put('/{id}', [UserController::class, 'update'])->name('update');
+            Route::get('/detail/{id}', [UserController::class, 'show'])->name('show');
 
-            Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+            Route::put('/detail/{id}', [UserController::class, 'update'])->name('update');
+
+            Route::delete('/detail/{id}', [UserController::class, 'destroy'])->name('destroy');
+
         });
 
         Route::prefix('team')->name('team.')->group(function () {
@@ -35,8 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::post('/create', [TeamController::class, 'store'])->name('store');
 
-            Route::put('/{id}', [TeamController::class, 'update'])->name('update');
+            Route::get('/detail/{id}', [TeamController::class, 'show'])->name('show');
 
+            Route::put('/detail/{id}', [TeamController::class, 'update'])->name('update');
+
+            Route::delete('/detail/{id}', [TeamController::class, 'destroy'])->name('destroy');
         });
     });
 });
@@ -44,14 +50,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::name('ui.')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
-
-    Route::get('/matches', [HomeController::class, 'matches'])->name('matches');
-
-    Route::get('/players', [HomeController::class, 'players'])->name('players');
-
-    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-
-    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
     Route::get('/login', [HomeController::class, 'AuthForm'])->name('AuthForm');
 

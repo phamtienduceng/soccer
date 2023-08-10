@@ -43,10 +43,13 @@ class TeamController extends Controller
             $team->isCommunityShield = $request->isCommunityShield;
         }
 
-        if ($request->has('logo')) {
-            $team->logo = $request->logo;
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $logo_name = $logo->getClientOriginalName();
+            $logoPath = 'public/images/Logo/Logo Icon/';
+            $logo->storeAs($logoPath, $logo_name);
+            $team->logo = 'images/Logo/Logo Icon/' . $logo_name;
         }
-        $team->logo = 'Null';
 
         $team->save();
 
@@ -61,21 +64,39 @@ class TeamController extends Controller
 
         if ($request->has('isPremierLeague')) {
             $team->isPremierLeague = $request->isPremierLeague;
+        } else {
+            $team->isPremierLeague = 'inactive';
         }
 
         if ($request->has('isFA')) {
             $team->isFA = $request->isFA;
+        } else {
+            $team->isFA = 'inactive';
         }
 
         if ($request->has('isCommunityShield')) {
             $team->isCommunityShield = $request->isCommunityShield;
+        } else {
+            $team->isCommunityShield = 'inactive';
+        }
+
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $logo_name = $logo->getClientOriginalName();
+            $logoPath = 'public/images/Logo/Logo Icon/';
+            $logo->storeAs($logoPath, $logo_name);
+            $team->logo = 'images/Logo/Logo Icon/' . $logo_name;
         }
 
         $team->save();
 
         return redirect()->route('admin.team.index')->with('success', 'Team updated successfully!');
     }
+
+    public function show($id)
+    {
+        $team = Teams::findOrFail($id);
+
+        return view('admin.pages.team.show', ['team' => $team]);
+    }
 }
-
-
-

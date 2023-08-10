@@ -39,7 +39,19 @@
                 </div>
             </div>
         </div>
-
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto mt-3" role="alert">
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span>
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}
+                        @endforeach
+                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -59,7 +71,9 @@
                             @foreach ($teams as $team)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $team->logo }}</td>
+                                    <td>
+                                        <img src="{{ asset($team->logo) }}">
+                                    </td>
                                     <td>{{ $team->team_name }}</td>
                                     <td>
                                         @if ($team->isPremierLeague == 'Active')
@@ -83,16 +97,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
-                                            data-mdb-target="#update_team">
+                                        <a type="button" href="{{ route('admin.team.show', $team->team_id) }}"
+                                            class="btn btn-link">
                                             <i class="fa-solid fa-gear text-primary"></i>
                                         </a>
-                                        @include('admin.pages.team.update')
-                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
-                                            data-mdb-target="#del">
-                                            <i class="fa-solid fa-trash text-danger"></i>
-                                        </a>
-                                    </td>
                                     </td>
                                 </tr>
                             @endforeach

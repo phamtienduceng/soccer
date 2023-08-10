@@ -14,22 +14,6 @@ class HomeController extends Controller
         return view('ui.pages.index');
     }
 
-    public function matches(){
-        return view('ui.pages.matches');
-    }
-
-    public function players(){
-        return view('ui.pages.players');
-    }
-
-    public function blog(){
-        return view('ui.pages.blogs');
-    }
-
-    public function contact(){
-        return view('ui.pages.contact');
-    }
-
     public function AuthForm()
     {
         return view('ui.pages.auth.login');

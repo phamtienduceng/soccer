@@ -17,6 +17,11 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'user_role' => 'required',
+            'user_status' => 'required'
+        ]);
+
         $user = User::findOrFail($id);
 
         $user->user_role = $request->input('user_role');
@@ -38,5 +43,12 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.user.index')->with('success_del', 'User deleted successfully');
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('admin.pages.user.show', ['user' => $user]);
     }
 }
