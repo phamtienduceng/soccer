@@ -70,6 +70,7 @@
                                 <label class="col-sm-2 col-form-label">Logo</label>
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" id="customFile" name="logo" />
+
                                 </div>
                             </div>
                             <hr>

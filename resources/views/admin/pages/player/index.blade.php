@@ -8,11 +8,11 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Team</h5>
+                        <h5 class="m-b-10">Player</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.Dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item" aria-current="page">Team</li>
+                        <li class="breadcrumb-item" aria-current="page">Player</li>
                     </ul>
                 </div>
             </div>
@@ -27,31 +27,13 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title text-center">
-                            New team?
-                            <span>
-                                <a href="{{ route('admin.team.add') }}">
-                                    <span class="pc-micon"><i class="ti ti-circle-plus"></i></span>
-                                    <span class="pc-mtext">Create now</span>
-                                </a>
-                            </span>
+                            Choose team to view player?
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto mt-3" role="alert">
-                <div class="d-flex justify-content-center align-items-center">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    <span>
-                        @foreach ($errors->all() as $error)
-                            {{ $error }}
-                        @endforeach
-                    </span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-        @endif
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -69,12 +51,14 @@
                         <tbody>
                             @foreach ($teams as $team)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <img src="{{ asset($team->logo) }}">
-
+                                        @if($team->logo != null)
+                                            <img src="{{ asset('/css/ui/images/'.$team->logo)}}" alt="" style="width:50px; height:50px;">
+                                        @endif
                                     </td>
-                                    <td>{{ $team->team_name }}</td>
+                                    <td>
+                                        <a href="{{ Route('admin.player.viewTeamPlayer', $team->slug) }}" style="margin-top: -20px">{{ $team->team_name}}</a>
+                                    </td>
                                     <td>
                                         @if ($team->isPremierLeague == 'Active')
                                             <i class="ti ti-circle-check" style="font-size: 25px"></i>
@@ -97,10 +81,16 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a type="button" href="{{ route('admin.team.show', $team->team_id) }}"
-                                            class="btn btn-link">
+                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
+                                            data-mdb-target="#update_team">
                                             <i class="fa-solid fa-gear text-primary"></i>
                                         </a>
+                                        @include('admin.pages.team.update')
+                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
+                                            data-mdb-target="#del">
+                                            <i class="fa-solid fa-trash text-danger"></i>
+                                        </a>
+                                    </td>
                                     </td>
                                 </tr>
                             @endforeach

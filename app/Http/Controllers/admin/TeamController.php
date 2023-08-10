@@ -28,8 +28,8 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $team = new Teams();
-
         $team->team_name = $request->team_name;
+        $team['slug'] = \Str::slug($request->team_name);
 
         if ($request->has('isPremierLeague')) {
             $team->isPremierLeague = $request->isPremierLeague;
@@ -43,14 +43,33 @@ class TeamController extends Controller
             $team->isCommunityShield = $request->isCommunityShield;
         }
 
+
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $logo_name = $logo->getClientOriginalName();
             $logoPath = 'public/images/Logo/Logo Icon/';
             $logo->storeAs($logoPath, $logo_name);
             $team->logo = 'images/Logo/Logo Icon/' . $logo_name;
+
+        if($request->hasFile('logo'))
+        {
+            $file = $request -> file('logo');
+            $ext = $file->getClientOriginalExtension();
+            if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+            {
+                $team = Teams::all();
+                return view('admin.pages.team.create')
+                    ->with('error', 'only jpg, png or jpeg');
+            }
+            $logo = $file->getClientOriginalName();
+            $file->move('css/ui/images', $logo);
+        }else
+        {
+            $logo = null;
+
         }
 
+        $team['logo'] = $logo;
         $team->save();
 
         return redirect()->route('admin.team.index')->with('success', 'Team created successfully!');
