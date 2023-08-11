@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id('post_id');
-            $table->varchar('title');
-            $table->varchar('content');
-            $table->varchar('image');
-            $table->rememberToken();
+            $table->string('title');
+            $table->string('content');
+            $table->string('category');
+            $table->string('image');
+            $table->enum('published', ['Active', 'Inactive'])->default('Inactive');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('user_id')
+                ->on('users');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('blogs');
     }
 };

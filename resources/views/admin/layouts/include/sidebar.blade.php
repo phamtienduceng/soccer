@@ -47,6 +47,14 @@
                         <span class="pc-mtext">Player</span>
                     </a>
                 </li>
+                <li class="pc-item {{ request()->routeIs('admin.blog.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.blog.index')}}" class="pc-link">
+                        <span class="pc-micon">
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="pc-mtext">Blogs</span>
+                    </a>
+                </li>
                 <li class="pc-item pc-caption">
                     <label>Category Manager</label>
                     <i class="nav-icon fas fa-box"></i>
