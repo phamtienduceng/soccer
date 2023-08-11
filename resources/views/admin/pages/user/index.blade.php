@@ -99,9 +99,11 @@
                                                 <td>{{ $user->user_phone }}</td>
                                                 <td>{{ $user->user_status }}</td>
                                                 <td>
-                                                    <a type="button" href="{{route('admin.user.show', $user->user_id)}}" class="btn btn-link">
+                                                    <a type="button" class="btn btn-link" data-mdb-toggle="modal"
+                                                        data-mdb-target="#update">
                                                         <i class="fa-solid fa-gear text-primary"></i>
                                                     </a>
+                                                    @include('admin.pages.user.update')
                                                     <a type="button" class="btn btn-link" data-mdb-toggle="modal"
                                                         data-mdb-target="#del">
                                                         <i class="fa-solid fa-trash text-danger"></i>
