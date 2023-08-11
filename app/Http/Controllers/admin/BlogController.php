@@ -34,10 +34,13 @@ class BlogController extends Controller
             'category' => 'required',
             'image' => 'required',
             'published',
-             session()->get('user_id');
         ]);
-
-        Blog::create($request->all());
+        $blog = $request->all();
+        if ($request->session()->has('user_id'))
+        {
+            $blog['user_id'] = $request->session()->get('user_id');
+        }
+        Blog::create($blog);
 
         return redirect()->route('admin.blog.index');
     }
