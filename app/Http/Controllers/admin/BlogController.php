@@ -35,11 +35,31 @@ class BlogController extends Controller
             'image' => 'required',
             'published',
         ]);
+
         $blog = $request->all();
         if ($request->session()->has('user_id'))
         {
             $blog['user_id'] = $request->session()->get('user_id');
         }
+        if($request->hasFile('image'))
+            {
+                $file = $request -> file('image');
+                $ext = $file->getClientOriginalExtension();
+                if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+                {
+                    $blogs = Blog::all();
+                    return view('admin.pages.blog.create')
+                        ->with('error', 'only jpg, png or jpeg');
+                }
+                $photoName = $file->getClientOriginalName();
+                $file->move('css/ui/images', $photoName);
+            }else
+            {
+                $photoName = null;
+            }
+
+            $blog['image'] = $photoName;
+
         Blog::create($blog);
 
         return redirect()->route('admin.blog.index');

@@ -1,7 +1,7 @@
 <?php
+use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController, BlogController};
+use App\Http\Controllers\ui\{HomeController, uiBlogController, ViewPlayerController};
 
-use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController};
-use App\Http\Controllers\ui\{HomeController, ViewPlayerController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AdminController, ProductController, CategoryController, OrderController, CustomerController};
 use App\Http\Controllers\{CartController, CheckoutController, AuthController, FeedbackController};
@@ -104,7 +104,7 @@ Route::name('ui.')->group(function () {
     Route::get('/players/sort/assists', [ViewPlayerController::class, 'sortByAssists'])->name('players.sort.assists');
     Route::get('/players/sort/name', [ViewPlayerController::class, 'sortByName'])->name('players.sort.name');
 
-    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+    Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
 
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
