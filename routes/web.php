@@ -82,6 +82,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('/playerStat', [PlayerController::class, 'playerStat'])->name('playerStat');
         });
+
+        Route::prefix('blog')->name('blog.')->group(function () {
+
+            Route::get('', [BlogController::class, 'index'])->name('index');
+
+            Route::get('/create}', [BlogController::class, 'addPost'])->name('addPost');
+
+            Route::post('/create', [BlogController::class, 'post'])->name('post');
+            
+        });
     });
 });
 
