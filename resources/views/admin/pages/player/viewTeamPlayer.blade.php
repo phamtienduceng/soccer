@@ -8,11 +8,14 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Player</h5>
+
+                        <h5 class="m-b-10">{{$team->team_name}}</h5>
+
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.Dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item" aria-current="page">Player</li>
+                        <li class="breadcrumb-item" aria-current="page">{{$team->team_name}}</li>
                     </ul>
                 </div>
             </div>
@@ -47,7 +50,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Photo</th>
-                                <th>Club</th>
+                                <th>Number</th>
                                 <th>Position</th>
                                 <th>Nationality</th>
                                 <th>Birthday</th>
@@ -61,16 +64,20 @@
                                         {{$tp->player_name}}
                                     </td>
                                     <td>
-                                        photo here
+                                        @if($tp->player_photo != null)
+                                            <img src="{{ asset('/css/ui/images/'.$tp->player_photo)}}" alt="" style="width:50px; height:auto;">
+                                        @endif
                                     </td>
                                     <td>
-                                        {{$tp->team_id}}
+                                        {{ $tp->club_number }}
+                                    </td>
+                                    <td class="@if ($tp->position === 'Goalkeeper') text-yellow @elseif ($tp->position === 'Defend') text-blue @elseif ($tp->position === 'Middlefield') text-green @elseif ($tp->position === 'Striker') text-red @endif">
+                                        {{ $tp->position }}
                                     </td>
                                     <td>
-                                        {{$tp->position}}
-                                    </td>
-                                    <td>
-                                        {{$tp->nationality}}
+                                        @if($tp->nationality != null)
+                                            <img src="{{ asset('/css/ui/images/'.$tp->nationality)}}" alt="" style="width:50px; height:auto;">
+                                        @endif
                                     </td>
                                     <td>
                                         {{$tp->birthday}}

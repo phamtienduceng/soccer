@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('nationality');
             $table->bigInteger('team_id')->unsigned();
             $table->foreign('team_id')->references('team_id')->on('teams');
-            $table->string('position');
+            $table->integer('club_number');
+            $table->string('position')->default('Unknown');
             $table->date('birthday');
             $table->timestamps();
         });

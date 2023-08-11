@@ -8,3 +8,20 @@
 <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/font.css') }}">
 <link rel="stylesheet" href="{{ asset('mdb/css/mdb.min.css') }}">
+<style>
+    .text-yellow {
+        color: olive;
+    }
+
+    .text-blue {
+        color: navy;
+    }
+
+    .text-green {
+        color: darkgreen;
+    }
+
+    .text-red {
+        color: Firebrick;
+    }
+</style>

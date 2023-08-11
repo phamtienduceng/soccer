@@ -15,17 +15,26 @@ class Player extends Model
 
     protected $fillable = [
         'player_name',
+        'player_photo',
         'nationality',
         'team_id',
         'position',
         'birthday',
+        'biography',
+        'club_number',
+        'goals',
+        'assists',
+        'clean_sheets',
     ];
+
 
     public $timestamps = true;
 
     protected $dates = ['created_at', 'updated_at'];
+
+    
     public function team()
     {
-        return $this->belongsTo(Team::class, 'team_id');
+        return $this->belongsTo(Teams::class, 'team_id');
     }
 }

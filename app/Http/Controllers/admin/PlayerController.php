@@ -23,7 +23,14 @@ class PlayerController extends Controller
 
         session(['teams' => $team]);
         
-        return view('admin.pages.player.viewTeamPlayer', compact('teamPlayers'));
+        return view('admin.pages.player.viewTeamPlayer', compact('team', 'teamPlayers'));
+    }
+
+    public function viewAllPlayer()
+    {
+        $player = Player::all();
+        
+        return view('admin.pages.player.viewAllPlayer', compact('player'));
     }
 
     public function add()
@@ -36,49 +43,61 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         $teams = session('teams');
+        $teamId = $request->input('team_id');
+        $clubNumber = $request->input('club_number');
 
-        $players = $request->all();
-        $players['team_id'] = $request->input('team_id');
-        $players['slug'] = \Str::slug($request->title);
+        $existingPlayer = Player::where('team_id', $teamId)->where('club_number', $clubNumber)->first();
 
-        if($request->hasFile('photo'))
-        {
-            $file = $request -> file('photo');
-            $ext = $file->getClientOriginalExtension();
-            if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+        if ($existingPlayer) {
+            $teams = session('teams');
+            return view('admin.pages.player.create', compact('teams'))->with('error', 'trung so ao');
+        }else{
+            
+            $teams = session('teams');
+            $players = $request->all();
+            $players['team_id'] = $request->input('team_id');
+            $players['slug'] = \Str::slug($request->title);
+            $teamSlug = $teams->slug;
+
+            if($request->hasFile('player_photo'))
             {
-                $teams = Teams::all();
-                return view('admin.pages.player.create')
-                    ->with('error', 'only jpg, png or jpeg');
-            }
-            $photoName = $file->getClientOriginalName();
-            $file->move('css/ui/images', $photoName);
-        }else
-        {
-            $photoName = null;
-        }
-
-        if($request->hasFile('nationality'))
-        {
-            $file = $request -> file('nationality');
-            $ext = $file->getClientOriginalExtension();
-            if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+                $file = $request -> file('player_photo');
+                $ext = $file->getClientOriginalExtension();
+                if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+                {
+                    $teams = Teams::all();
+                    return view('admin.pages.player.create')
+                        ->with('error', 'only jpg, png or jpeg');
+                }
+                $photoName = $file->getClientOriginalName();
+                $file->move('css/ui/images', $photoName);
+            }else
             {
-                $teams = Teams::all();
-                return view('admin.pages.player.create')
-                    ->with('error', 'only jpg, png or jpeg');
+                $photoName = null;
             }
-            $natName = $file->getClientOriginalName();
-            $file->move('css/ui/images', $natName);
-        }else
-        {
-            $natName = null;
+
+            if($request->hasFile('nationality'))
+            {
+                $file = $request -> file('nationality');
+                $ext = $file->getClientOriginalExtension();
+                if($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg')
+                {
+                    $teams = Teams::all();
+                    return view('admin.pages.player.create')
+                        ->with('error', 'only jpg, png or jpeg');
+                }
+                $natName = $file->getClientOriginalName();
+                $file->move('css/ui/images', $natName);
+            }else
+            {
+                $natName = null;
+            }
+
+            $players['player_photo'] = $photoName;
+            $players['nationality'] = $natName;
+
+            Player::create($players);
+            return redirect()->route('admin.player.viewTeamPlayer', ['slug' => $teamSlug]);
         }
-
-        $players['photo'] = $photoName;
-        $players['nationality'] = $natName;
-
-        Player::create($players);
-        return redirect()->route('admin.player.viewTeamPlayer', ['slug' => $teams->slug]);
     }
 }
