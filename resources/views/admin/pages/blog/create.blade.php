@@ -55,7 +55,6 @@
                             </div>
 
                             <div class="form-group">
-
                                 <label for="published">Publised</label>
                                 <div class="form-group">
                                     <div class="form-check form-switch">

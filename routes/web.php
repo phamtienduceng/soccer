@@ -45,7 +45,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('admin')->group(function () {
 
-        //Route::get('/', [DashboardController::class, 'Dashboard'])->name('Dashboard');
+        Route::get('/', [DashboardController::class, 'Dashboard'])->name('Dashboard');
 
         Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
         Route::get('logout', [DashboardController::class, 'AuthOut'])->name('AuthOut');
@@ -91,6 +91,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::post('/create', [BlogController::class, 'post'])->name('post');
             
+            Route::get('/{id}/edit', [BlogController::class, 'edit'])->name('edit');
+
+            Route::put('/{id}/update', [BlogController::class, 'update'])->name('update');
+            
+            Route::delete('/{id}/delete', [BlogController::class, 'delete'])->name('delete');
         });
     });
 });

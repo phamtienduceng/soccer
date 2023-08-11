@@ -1,5 +1,5 @@
 @extends('ui.layouts.app')
-@section('title', 'Home')
+@section('title', 'Blog')
 
 @section('content')
 <div class="hero overlay" style="background-image: url('images/bg_3.jpg');">
@@ -7,7 +7,7 @@
         <div class="row align-items-center">
           <div class="col-lg-5 mx-auto text-center">
             <h1 class="text-white">Blog Posts</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, molestias repudiandae pariatur.</p>
+            <p>SoccerTM</p>
           </div>
         </div>
       </div>

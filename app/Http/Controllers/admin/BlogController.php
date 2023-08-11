@@ -65,4 +65,50 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index');
     }
 
+    public function edit($id)
+    {
+        $blog = Blog::find($id);
+        $cate_blog_id = Cate_blog::all();
+
+        return view('admin.pages.blog.edit', compact('blog', 'cate_blog_id'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'image|max:2048',
+            'category' => 'required',
+            'published' ,
+        ]);
+
+        $blog = Blog::findOrFail($id);
+        $cate_blog_id = Cate_blog::all();
+
+        $blog->title = $request->input('title');
+        $blog->published = $request->input('published');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $imagePath = 'images/' . $blog->image . '/' . $imageName;
+            $image->storeAs('public/' . $imagePath);
+            $blog->image = $imagePath;
+        }
+
+        $blog->save();
+
+        return redirect()->route('admin.blog.index')->with('success-update', 'Blog has been updated successfully.');
+    }
+
+    public function delete($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $cate_blog_id = Cate_blog::all();
+
+        $blog->delete();
+
+        return redirect()->route('admin.blog.index')->with('success-del', 'Blog deleted successfully!');
+    }
 }
