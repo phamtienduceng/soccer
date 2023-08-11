@@ -85,12 +85,27 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index');
     }
 
-    public function viewPost($id)
+    public function viewPost()
     {
-        $blog = Blog::find($id);
+        $blogs = Blog::all();
         $cate_blog_id = Cate_blog::all();
+        $users = User::all();
 
-        return view('admin.pages.blog.viewPost', compact('blog', 'cate_blog_id'));
+        $mapCategory = $cate_blog_id->mapWithKeys(function ($item) {
+          return [$item->cate_blog_id => $item->name];
+        });
+        $mapUser = $users->mapWithKeys(function ($item) {
+            return [$item->user_id => $item->user_name];
+          });
+
+        // dd($mapUser->get('1'));
+
+        foreach ($blogs as $blogView) {
+            $blogView->categoryName = $mapCategory->get($blogView->category);
+            $blogView->author = $mapUser->get($blogView->user_id);
+        }
+
+        return view('admin.pages.blog.viewPost', compact('blogs', 'cate_blog_id'));
     }
     public function edit($id)
     {
