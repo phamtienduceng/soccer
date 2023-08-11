@@ -28,7 +28,9 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title text-center">
-                            Choose team to view player?
+                            <a href="{{ Route('admin.player.playerStat')}}">
+                                View player stats
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -42,7 +44,7 @@
                             </a>
                         </p>
                     </div>
-                </div>
+</div>
             </div>
         </div>  
         <div class="row">

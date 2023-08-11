@@ -26,6 +26,14 @@ class PlayerController extends Controller
         return view('admin.pages.player.viewTeamPlayer', compact('team', 'teamPlayers'));
     }
 
+    public function playerStat()
+    {
+        $player = Player::all();
+
+        
+        return view('admin.pages.player.playerStat', compact('player'));
+    }
+
     public function viewAllPlayer()
     {
         $player = Player::all();

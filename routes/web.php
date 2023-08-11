@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController};
+use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController};
 use App\Http\Controllers\ui\{HomeController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AdminController, ProductController, CategoryController, OrderController, CustomerController};
@@ -80,9 +80,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('/allPlayer', [PlayerController::class, 'viewAllPlayer'])->name('viewAllPlayer');
 
+            Route::get('/playerStat', [PlayerController::class, 'playerStat'])->name('playerStat');
         });
     });
 });
+
+
 
 
 
