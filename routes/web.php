@@ -1,7 +1,7 @@
 <?php
-
 use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController, BlogController};
-use App\Http\Controllers\ui\{HomeController, uiBlogController};
+use App\Http\Controllers\ui\{HomeController, uiBlogController, ViewPlayerController};
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AdminController, ProductController, CategoryController, OrderController, CustomerController};
 use App\Http\Controllers\{CartController, CheckoutController, AuthController, FeedbackController};
@@ -106,7 +106,13 @@ Route::name('ui.')->group(function () {
 
     Route::get('/matches', [HomeController::class, 'matches'])->name('matches');
 
-    Route::get('/players', [HomeController::class, 'players'])->name('players');
+    Route::get('/players', [ViewPlayerController::class, 'index'])->name('players');
+
+    Route::post('/players/search', [ViewPlayerController::class, 'search'])->name('players.search');
+
+    Route::get('/players/sort/goals', [ViewPlayerController::class, 'sortByGoals'])->name('players.sort.goals');
+    Route::get('/players/sort/assists', [ViewPlayerController::class, 'sortByAssists'])->name('players.sort.assists');
+    Route::get('/players/sort/name', [ViewPlayerController::class, 'sortByName'])->name('players.sort.name');
 
     Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
 

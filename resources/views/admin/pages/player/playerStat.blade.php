@@ -35,13 +35,18 @@
                 <div class="card">
                     <div class="card-body">
                         <label for="">Filter: </label>
-                        <select name="" id="">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
+                        <select id="filterDropdown">
+  <option value="option1">Option 1</option>
+  <option value="option2">Option 2</option>
+  <option value="option3">Option 3</option>
+</select>
+
+<ul id="dataList">
+  <li data-category="option1">Item 1</li>
+  <li data-category="option2">Item 2</li>
+  <li data-category="option1">Item 3</li>
+  <li data-category="option3">Item 4</li>
+</ul>
                     </div>
                 </div>
             </div>
@@ -105,3 +110,5 @@
         </div>
     </div>
 @endsection
+
+
