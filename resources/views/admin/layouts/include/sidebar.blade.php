@@ -31,6 +31,12 @@
                         <span class="pc-mtext">Users</span>
                     </a>
                 </li>
+                <li class="pc-item {{ request()->routeIs('admin.match.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.match.index')}}" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-golf"></i></span>
+                        <span class="pc-mtext">Match</span>
+                    </a>
+                </li>
                 <li class="pc-item {{ request()->routeIs('admin.team.index') ? 'active' : '' }}">
                     <a href="{{route('admin.team.index')}}" class="pc-link">
                         <span class="pc-micon">
