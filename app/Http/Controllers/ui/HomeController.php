@@ -13,6 +13,14 @@ class HomeController extends Controller
     {
         return view('ui.pages.index');
     }
+    public function cart()
+    {
+        return view('ui.cart.add');
+    }
+    public function product()
+    {
+        return view('ui.product.show');
+    }
 
     public function matches(){
         return view('ui.pages.matches');

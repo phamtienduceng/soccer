@@ -6,106 +6,65 @@
       <div class="container">
         <div class="row">
           <div class="col-6 title-section">
-            <h2 class="heading">Star Players / Videos</h2>
-          </div>
-          <div class="col-6 text-right">
-            <div class="custom-nav">
-            <a href="#" class="js-custom-prev-v2"><span class="icon-keyboard_arrow_left"></span></a>
-            <span></span>
-            <a href="#" class="js-custom-next-v2"><span class="icon-keyboard_arrow_right"></span></a>
-            </div>
+            <h2 class="heading">Players</h2>
           </div>
         </div>
 
+		<div class="card text-center" style="margin-bottom: 30px; padding-top: -30px" >
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="card-body">
+							<form action="{{ route('ui.players.search') }}" method="POST">
+                  @csrf
+                  <label for="">Search player: </label>
+                  <input type="text" name="search" placeholder="Enter search term">
+                  <button type="submit">Search</button>
+              </form>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="card-body">
+							<label for="">Filter: </label>
+							<select id="filterDropdown">
+								<option value="option1">Option 1</option>
+								<option value="option2">Option 2</option>
+								<option value="option3">Option 3</option>
+							</select>
+						</div>
 
-        <div class="owl-4-slider owl-carousel">
-          <div class="item">
-            <div class="video-media">
-              <img src="{{ asset('/css/ui/images/img_1.jpg') }}" alt="Image" class="img-fluid">
-              <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
-                <span class="icon mr-3">
-                  <span class="icon-play"></span>
-                </span>
-                <div class="caption">
-                  <span class="meta">#10 / Forward</span>
-                  <h3 class="m-0">Phillip Hobbs</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="video-media">
-              <img src="{{ asset('/css/ui/images/img_2.jpg') }}" alt="Image" class="img-fluid">
-              <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
-                <span class="icon mr-3">
-                  <span class="icon-play"></span>
-                </span>
-                <div class="caption">
-                  <span class="meta">#7 / Forward</span>
-                  <h3 class="m-0">Garry Norris</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="video-media">
-              <img src="{{ asset('/css/ui/images/img_3.jpg') }}" alt="Image" class="img-fluid">
-              <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
-                <span class="icon mr-3">
-                  <span class="icon-play"></span>
-                </span>
-                <div class="caption">
-                  <span class="meta">#4 / Forward</span>
-                  <h3 class="m-0">Romolu Harper</h3>
-                </div>
-              </a>
-            </div>
-          </div>
+					</div>
+					<div class="col-sm-4">
+					<div class="card-body">
+                        <label for="">Sort: </label>
+                        <select onchange="sortPlayers(this.value)">
+                            <option value="">Sort by</option>
+                            <option value="name">Name</option>
+                            <option value="goals">Goals</option>
+                            <option value="assists">Assists</option>
+                        </select>
+                    </div>
+					</div>
+				</div>
 
-          <div class="item">
-            <div class="video-media">
-              <img src="{{ asset('/css/ui/images/img_1.jpg') }}" alt="Image" class="img-fluid">
-              <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
-                <span class="icon mr-3">
-                  <span class="icon-play"></span>
-                </span>
-                <div class="caption">
-                  <span class="meta">#4 / Forward</span>
-                  <h3 class="m-0">Phillip Hobbs</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="video-media">
-              <img src="images/img_2.jpg" alt="Image" class="img-fluid">
-              <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
-                <span class="icon mr-3">
-                  <span class="icon-play"></span>
-                </span>
-                <div class="caption">
-                  <span class="meta">#1 / GoalKeeper</span>
-                  <h3 class="m-0">Garry Norris</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="video-media">
-              <img src="images/img_3.jpg" alt="Image" class="img-fluid">
-              <a href="https://vimeo.com/139714818" class="d-flex play-button align-items-center" data-fancybox>
-                <span class="icon mr-3">
-                  <span class="icon-play"></span>
-                </span>
-                <div class="caption">
-                  <span class="meta">#8 / Forward</span>
-                  <h3 class="m-0">Romolu Harper</h3>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+		</div>
 
+
+
+        <div class="row player-card">
+            @foreach($players as $tp)
+          		<div class="col-3" sytle="">
+          			<div class="card">
+          				<img src="{{ asset('/css/ui/images/'.$tp->player_photo)}}" alt="Player Image" class="card-img">
+         				<div class="card-body">
+							<p class="card-text">Name: {{$tp->player_name}}</p>
+							<p class="card-text">Position: {{$tp->position}}</p>
+							<p class="card-text">Club: {{$tp->team->team_name}}</p>
+							<button class="btn">View Profile</button>
+          				</div>
+        			</div>
+          		</div>
+				@endforeach
+        	</div>
       </div>
     </div>
 
