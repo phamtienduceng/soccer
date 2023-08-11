@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\{DashboardController, UserController, TeamController};
+use App\Http\Controllers\admin\{DashboardController, UserController, TeamController,ContactController,EmailController};
 use App\Http\Controllers\ui\{HomeController};
 use Illuminate\Support\Facades\Route;
 
@@ -37,10 +37,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
         });
+        
+        Route::prefix('contact')->name('contact.')->group(function () {
+
+            Route::get('', [ContactController::class, 'index'])->name('index');
+
+        });
     });
 });
 
 Route::name('ui.')->group(function () {
+    Route::get('/send-email', [EmailController::class, 'feedback'])->name('feedback');
+
+    Route::post('/send', [EmailController::class, 'send'])->name('send.email');
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -51,6 +60,10 @@ Route::name('ui.')->group(function () {
     Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+    Route::get('/viewContactDetail/{id}', [ContactController::class, 'viewContactDetail'])->name('viewContactDetail');
+
+    Route::post('/getContactUs', [ContactController::class, 'getContactUs'])->name('getContactUs');
 
     Route::get('/login', [HomeController::class, 'AuthForm'])->name('AuthForm');
 

@@ -36,6 +36,14 @@
                         <span class="pc-mtext">Teams</span>
                     </a>
                 </li>
+                
+                <li class="pc-item">
+                    <a href="{{route('admin.contact.index')}}" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-ball-football"></i></span>
+                        <span class="pc-mtext">Contact Us</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
