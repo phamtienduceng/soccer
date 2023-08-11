@@ -22,87 +22,22 @@
         </div>
       </div>
       <div class="row">
+        @foreach($blogs as $i)
         <div class="col-lg-4 mb-4">
           <div class="custom-media d-block">
             <div class="img mb-4">
-              <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+              <a href="single.html"><img src="{{ asset('/css/ui/images/'.$i->image)}}" alt="Image" class="img-fluid"></a>
             </div>
             <div class="text">
-              <span class="meta">May 20, 2020</span>
-              <h3 class="mb-4"><a href="#">Romolu to stay at Real Nadrid?</a></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus deserunt saepe tempora dolorem.</p>
+              <span class="meta">{{$i->created_at}}</span>
+              <h3 class="mb-4"><a href="#">{{$i->title}}</a></h3>
               <p><a href="#">Read more</a></p>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mb-4">
-          <div class="custom-media d-block">
-            <div class="img mb-4">
-              <a href="single.html"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="text">
-              <span class="meta">May 20, 2020</span>
-              <h3 class="mb-4"><a href="#">Romolu to stay at Real Nadrid?</a></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus deserunt saepe tempora dolorem.</p>
-              <p><a href="#">Read more</a></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-          <div class="custom-media d-block">
-            <div class="img mb-4">
-              <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="text">
-              <span class="meta">May 20, 2020</span>
-              <h3 class="mb-4"><a href="#">Romolu to stay at Real Nadrid?</a></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus deserunt saepe tempora dolorem.</p>
-              <p><a href="#">Read more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="custom-media d-block">
-            <div class="img mb-4">
-              <a href="single.html"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="text">
-              <span class="meta">May 20, 2020</span>
-              <h3 class="mb-4"><a href="#">Romolu to stay at Real Nadrid?</a></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus deserunt saepe tempora dolorem.</p>
-              <p><a href="#">Read more</a></p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 mb-4">
-          <div class="custom-media d-block">
-            <div class="img mb-4">
-              <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="text">
-              <span class="meta">May 20, 2020</span>
-              <h3 class="mb-4"><a href="#">Romolu to stay at Real Nadrid?</a></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus deserunt saepe tempora dolorem.</p>
-              <p><a href="#">Read more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div class="custom-media d-block">
-            <div class="img mb-4">
-              <a href="single.html"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
-            </div>
-            <div class="text">
-              <span class="meta">May 20, 2020</span>
-              <h3 class="mb-4"><a href="#">Romolu to stay at Real Nadrid?</a></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus deserunt saepe tempora dolorem.</p>
-              <p><a href="#">Read more</a></p>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
+      
 
       <div class="row justify-content-center">
         <div class="col-lg-7 text-center">
