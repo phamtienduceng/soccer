@@ -24,7 +24,7 @@
                         <li><a href="{{ Route('ui.matches')}}" class="nav-link">Matches</a></li>
                         <li><a href="{{ Route('ui.players')}}" class="nav-link">Players</a></li>
                         <li><a href="{{ Route('ui.contact')}}" class="nav-link">Shop</a></li>
-                        <li><a href="{{ Route('ui.blog')}}" class="nav-link">Blog</a></li>
+                        <li><a href="{{ Route('ui.blog.index')}}" class="nav-link">Blog</a></li>
                         <li><a href="{{ Route('ui.contact')}}" class="nav-link">Contact</a></li>
                         <li><a href="{{ Route('ui.AuthForm')}}" class="nav-link">User</a></li>
                        

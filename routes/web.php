@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController, BlogController};
-use App\Http\Controllers\ui\{HomeController};
+use App\Http\Controllers\ui\{HomeController, uiBlogController};
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AdminController, ProductController, CategoryController, OrderController, CustomerController};
 use App\Http\Controllers\{CartController, CheckoutController, AuthController, FeedbackController};
@@ -108,7 +108,7 @@ Route::name('ui.')->group(function () {
 
     Route::get('/players', [HomeController::class, 'players'])->name('players');
 
-    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+    Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
 
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
