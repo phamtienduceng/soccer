@@ -6,3 +6,18 @@
 <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
 <script src="{{ asset('mdb/js/mdb.min.js') }}"></script>
 @yield('script')
+
+<script>
+    document.getElementById('filterDropdown').addEventListener('change', function() {
+  var selectedValue = this.value;
+  var listItems = document.querySelectorAll('#dataList li');
+  
+  listItems.forEach(function(item) {
+    if (selectedValue === 'all' || item.getAttribute('data-category') === selectedValue) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+</script>
