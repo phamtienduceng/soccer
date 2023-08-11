@@ -90,6 +90,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/create}', [BlogController::class, 'addPost'])->name('addPost');
 
             Route::post('/create', [BlogController::class, 'post'])->name('post');
+
+            Route::get('/{id}/viewPost', [BlogController::class, 'viewPost'])->name('viewPost');
             
             Route::get('/{id}/edit', [BlogController::class, 'edit'])->name('edit');
 

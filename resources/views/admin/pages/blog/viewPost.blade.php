@@ -13,7 +13,7 @@
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.Dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.blog.index') }}">Blog</a></li>
-                    <li class="breadcrumb-item active">Edit Blog</li>
+                    <li class="breadcrumb-item active">View Blog Details</li>
                 </ul>
             </div>
         </div>
@@ -22,31 +22,6 @@
 @endsection
 
 @section('content')
-
-<div class="card">
-    <div class="card-body">
-        <form method="POST" action="{{ route('admin.blog.update', $blog->post_id) }}" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-
-            @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session()->get('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
-            @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Please fix the following errors:
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>

@@ -15,5 +15,6 @@ class Cate_blog extends Model
 
     protected $fillable = [
         'name',
+        'cate_blog_id',
     ];
 }

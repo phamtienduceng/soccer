@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Cate_blog;
+use App\Models\User;
 
 class BlogController extends Controller
 {
@@ -13,8 +14,25 @@ class BlogController extends Controller
     {
         $blogs = Blog::all();
         $cate_blog_id = Cate_blog::all();
+        $users = User::all();
 
+        $mapCategory = $cate_blog_id->mapWithKeys(function ($item) {
+          return [$item->cate_blog_id => $item->name];
+        });
+        $mapUser = $users->mapWithKeys(function ($item) {
+            return [$item->user_id => $item->user_name];
+          });
+
+        //dd($map->get('1'));
+
+        foreach ($blogs as $blog) {
+            $blog->categoryName = $mapCategory->get($blog->category);
+            $blog->author = $mapUser->get($blog->user_id);
+        }
+        // dd($blogs);
+        // dd($cate_blog_id);
         return view('admin.pages.blog.index', compact('blogs', 'cate_blog_id'));
+        
     }
 
     public function addPost()
@@ -22,7 +40,9 @@ class BlogController extends Controller
         $blogs = Blog::all();
         $cate_blog_id = Cate_blog::all();
 
+        
         return view('admin.pages.blog.create', compact('blogs', 'cate_blog_id'));
+        
     }
 
     public function post(Request $request)
@@ -65,6 +85,13 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index');
     }
 
+    public function viewPost($id)
+    {
+        $blog = Blog::find($id);
+        $cate_blog_id = Cate_blog::all();
+
+        return view('admin.pages.blog.viewPost', compact('blog', 'cate_blog_id'));
+    }
     public function edit($id)
     {
         $blog = Blog::find($id);
@@ -92,7 +119,7 @@ class BlogController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = $image->getClientOriginalName();
-            $imagePath = 'images/' . $blog->image . '/' . $imageName;
+            $imagePath =  $imageName;
             $image->storeAs('public/' . $imagePath);
             $blog->image = $imagePath;
         }

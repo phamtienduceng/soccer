@@ -70,6 +70,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Author</th>
                         <th scope="col">Create Time</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
@@ -95,19 +97,37 @@
                                     N/A
                                 @endif
                             </td>
+                                
+                            <td>
+                                {{$b->categoryName}}
+                            </td>
+
+                            <td>
+                                {{$b->author}}
+
+                            </td>
 
                             <td>
                                 {{ $b->created_at}}                                
                             </td>
+
                             <td>
                                 {{ ucfirst($b->published) }} 
                             </td>
 
                             <td>
+                                
+                                <a href="{{ route('admin.blog.viewPost', $b->post_id) }}"
+                                    class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                
                                 <a href="{{ route('admin.blog.edit', $b->post_id) }}"
                                     class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i> Edit
+                                    <i class="fas fa-edit"></i>
                                 </a>
+
+                                
 
                                 <form action="{{ route('admin.blog.delete', $b->post_id) }}" method="POST"
                                     style="display: inline-block;">
@@ -115,7 +135,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Are you sure you want to delete this post?')">
-                                        <i class="fas fa-trash-alt"></i> Delete
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
                             </td>
