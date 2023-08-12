@@ -27,7 +27,10 @@ class Blog extends Model
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
-    
+    public function cate()
+    {
+        return $this->belongsTo(Cate_blog::class, 'category', 'cate_blog_id');
+    }
     
     public $timestamps = true;
 

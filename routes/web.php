@@ -123,6 +123,8 @@ Route::name('ui.')->group(function () {
 
     Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
 
+    Route::get('/blogDetail/{id}', [uiBlogController::class, 'blogDetail'])->name('blogDetail.index');
+
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
     Route::get('/login', [HomeController::class, 'AuthForm'])->name('AuthForm');

@@ -108,7 +108,7 @@
                             </td>
 
                             <td>
-                                {{ $b->created_at}}                                
+                                {{ $b->created_at->todatestring()}}                                
                             </td>
 
                             <td>
@@ -118,24 +118,22 @@
                             <td>
                                 
                                 <a href="{{ route('admin.blog.viewPost', $b->post_id) }}"
-                                    class="btn btn-sm btn-primary">
-                                    <i class="fa-solid fa-eye"></i>
+                                    class=" btn-sm btn-primary">
+                                    <i class="fa fa-eye"></i>
                                 </a>
                                 
                                 <a href="{{ route('admin.blog.edit', $b->post_id) }}"
-                                    class="btn btn-sm btn-primary">
-                                    <i class="fas fa-edit"></i>
+                                    class=" btn-sm btn-primary">
+                                    <i class="fa fa-edit"></i>
                                 </a>
-
                                 
-
                                 <form action="{{ route('admin.blog.delete', $b->post_id) }}" method="POST"
                                     style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
+                                    <button type="submit" class="btn-sm border-0" 
                                         onclick="return confirm('Are you sure you want to delete this post?')">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash-alt" style = "color:red;"></i>
                                     </button>
                                 </form>
                             </td>

@@ -25,18 +25,17 @@
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title" required value="">
+                <input type="text" class="form-control" id="title" name="title" readonly value="{{ $blog->title}}">
             </div>
 
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <input type="text" class="form-control" id="content" name="content" required
-                    value="" height="100px">
+                <textarea class="form-control" name="content"rows="8" readonly >{{ $blog->content }}</textarea>
             </div>
 
             <div class="mb-3">
-                <label for="image" class="form-label">Old Image</label> <br>
-                <img src="" alt="" class=""
+                <label for="image" class="form-label">Image</label> <br>
+                <img src="{{ asset('/css/ui/images/'.$blog->image)}}" alt="{{ $blog->title }}" class=""
                     style="max-width: 200px; max-height: 200px;">
             </div>
 
@@ -44,20 +43,26 @@
 
             <div class="form-group">
                 <label for="category">Type</label>
-                
+                <input type="text" class="form-control" id="title" name="title" readonly value="{{ $blog->cate->name}}">
             </div>
 
             <div class="form-group">
-                <label for="published">Publised</label>
-                <div class="form-group">
-                    <div class="form-check form-switch">
-                        <span id="statusText">Active</span>
-                    </div>
-                </div>
+                <label for="published">Publised: </label>
+                <span id="statusText">{{$blog->published}}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="user_id">Author: </label>
+                <span id="user_id">{{$blog->user->user_name}}</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="created_at">Date: </label>
+                <span id="created_at">{{$blog->created_at->todatestring()}}</span>
             </div>
 
             <div class="text-center">
-                <button class="btn btn-primary" type="submit">Submit</button>
+            <a href="{{ route('admin.blog.index') }}"> <button class="btn btn-primary" type="submit">Back</button></a>
             </div>
 
         </form>

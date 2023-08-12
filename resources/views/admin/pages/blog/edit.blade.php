@@ -55,9 +55,9 @@
 
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <input type="text" class="form-control" id="content" name="content" required
-                    value="{{ $blog->content }}" height="100px">
-                    <!-- <textarea class="form-control" name="content" id="content" rows="8" >{{ $blog->content }}</textarea> -->
+                <!-- <input type="text" class="form-control" id="content" name="content" required
+                    value="{{ $blog->content }}"> -->
+                <textarea class="form-control" name="content" id="content" rows="8" >{{ $blog->content }}</textarea>
             </div>
 
             <div class="mb-3">

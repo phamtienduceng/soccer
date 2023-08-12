@@ -16,5 +16,11 @@ class uiBlogController extends Controller
 
         return view('ui.pages.blogs', compact('blogs', 'cate_blog_id'));
     }
+    public function blogDetail($id)
+    {
+        $blog = Blog::find($id);
+        $cate_blog_id = Cate_blog::all();
 
+        return view('ui.pages.blogDetail', compact('blog', 'cate_blog_id'));
+    }
 }
