@@ -18,31 +18,63 @@
         background-color: #f5f5f5;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 10px;
+        padding: 5px;
+        padding-bottom: 0px;
         margin-bottom: 30px;
         }
 
 .card-img {
   width: 100%;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .card-title {
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 5px;
 }
 
 .card-text {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
-.btn {
-  background-color: #4285f4;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
+    .sidebar .card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar .card-body {
+    margin-bottom: 15px;
+    }
+
+    .sidebar label {
+    font-weight: bold;
+    }
+
+    .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    }
+
+    .sidebar input[type="checkbox"] {
+    margin-right: 5px;
+    }
+
+    .sidebar button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    }
+
+    .sidebar button[type="submit"]:hover {
+    background-color: #45a049;
+    }
 </style>

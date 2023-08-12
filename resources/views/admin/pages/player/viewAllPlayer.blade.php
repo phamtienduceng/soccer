@@ -98,14 +98,10 @@
                                     </td>
                                     <td>
                                         <a type="button" class="btn btn-link" data-mdb-toggle="modal"
-                                            data-mdb-target="#update_team">
+                                            data-mdb-target="#update_player">
                                             <i class="fa-solid fa-gear text-primary"></i>
                                         </a>
-                                   
-                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
-                                            data-mdb-target="#del">
-                                            <i class="fa-solid fa-trash text-danger"></i>
-                                        </a>
+                                        
                                     </td>
                                     </td>
                                 </tr>

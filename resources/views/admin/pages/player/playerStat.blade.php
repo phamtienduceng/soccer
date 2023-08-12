@@ -22,42 +22,34 @@
 
 @section('content')
     <div class="pc-content">
+    <div class="card">
         <div class="row">
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <label for="">Search player: </label>
-                        <input type="search">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <label for="">Filter: </label>
-                        <select id="filterDropdown">
-  <option value="option1">Option 1</option>
-  <option value="option2">Option 2</option>
-  <option value="option3">Option 3</option>
-</select>
 
-<ul id="dataList">
-  <li data-category="option1">Item 1</li>
-  <li data-category="option2">Item 2</li>
-  <li data-category="option1">Item 3</li>
-  <li data-category="option3">Item 4</li>
-</ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <label for="">Sort: </label>
-                        <input type="">
-                    </div>
-                </div>
-            </div>
+        <div class="col-sm-4">
+    <div class="card-body">
+        <form action="{{ route('admin.player.searchStat') }}" method="GET">
+            <label for="">Search player: </label>
+            <input type="text" name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</div>
+<div class="col-sm-4">
+    <div class="card-body">
+        
+      <form action="{{ route('admin.player.sortStat') }}" method="POST">
+        @csrf
+        <label for="">Sort: </label>
+        <select name="sort_by" onchange="this.form.submit()">
+          <option value="">Sort by</option>
+          <option value="name">Name</option>
+          <option value="goals">Goals</option>
+          <option value="assists">Assists</option>
+        </select>
+      </form>
+    </div>
+</div>
+        </div>
         </div>
         <div class="card">
             <div class="card-body">

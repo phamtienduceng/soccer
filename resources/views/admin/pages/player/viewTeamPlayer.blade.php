@@ -32,7 +32,7 @@
                         <p class="card-title text-center">
                             Add new player
                             <span>
-                                <a href="{{ route('admin.player.add') }}">
+                                <a href="{{ route('admin.player.create') }}">
                                     <span class="pc-micon"><i class="ti ti-circle-plus"></i></span>
                                     <span class="pc-mtext">Add now</span>
                                 </a>
@@ -83,14 +83,11 @@
                                         {{$tp->birthday}}
                                     </td>
                                     <td>
-                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
-                                            data-mdb-target="#update_team">
-                                            <i class="fa-solid fa-gear text-primary"></i>
-                                        </a>
-                                   
-                                        <a type="button" class="btn btn-link" data-mdb-toggle="modal"
-                                            data-mdb-target="#del">
-                                            <i class="fa-solid fa-trash text-danger"></i>
+                                        <a href="{{ Route('admin.player.edit', $tp->player_id)}}" class="action-item btn btn-success btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-flag"></i>
+                                            </span>
+                                            <span class="text">Update</span>
                                         </a>
                                     </td>
                                     </td>

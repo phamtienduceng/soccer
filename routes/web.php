@@ -74,14 +74,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('/club/{slug}', [PlayerController::class, 'viewTeamPlayer'])->name('viewTeamPlayer');
 
-            Route::get('/create', [PlayerController::class, 'add'])->name('add');
-
-            Route::post('/create', [PlayerController::class, 'store'])->name('store');
-
             Route::get('/allPlayer', [PlayerController::class, 'viewAllPlayer'])->name('viewAllPlayer');
 
             Route::get('/playerStat', [PlayerController::class, 'playerStat'])->name('playerStat');
+
+            Route::get('/searchStat', [PlayerController::class, 'searchStat'])->name('searchStat');
+
+            Route::post('/sortStat', [PlayerController::class, 'sortStat'])->name('sortStat');
+
         });
+
+        Route::resource('/player', PlayerController::class);
 
         Route::prefix('blog')->name('blog.')->group(function () {
 
@@ -110,9 +113,11 @@ Route::name('ui.')->group(function () {
 
     Route::post('/players/search', [ViewPlayerController::class, 'search'])->name('players.search');
 
-    Route::get('/players/sort/goals', [ViewPlayerController::class, 'sortByGoals'])->name('players.sort.goals');
-    Route::get('/players/sort/assists', [ViewPlayerController::class, 'sortByAssists'])->name('players.sort.assists');
-    Route::get('/players/sort/name', [ViewPlayerController::class, 'sortByName'])->name('players.sort.name');
+    Route::post('/sort-players', [ViewPlayerController::class, 'sort'])->name('sort');
+
+    Route::get('/filter-players', [ViewPlayerController::class, 'filter'])->name('filter');
+
+    Route::get('/pl/{id}', [ViewPlayerController::class, 'detailPlayer'])->name('detailPlayer');
 
     Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
 
