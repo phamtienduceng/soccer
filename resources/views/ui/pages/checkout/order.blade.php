@@ -24,7 +24,7 @@
                                                         <th>Order Total</th>
                                                         <th>Order Status</th>
                                                         <th>Shipping Name</th>
-                                                        <th>Shipping Address</th>
+                                                        <th>Address</th>
                                                         <th>Payment Method</th>
                                                         <th>Order Date</th>
                                                     </tr>
@@ -42,7 +42,7 @@
                                                                 @endif
                                                             </td>
                                                             <td>{{ $order->shipping_full_name }}</td>
-                                                            <td>{{ $order->shipping_address }},
+                                                            <td>
                                                                 {{ $order->shipping_province }},
                                                                 {{ $order->shipping_district }}</td>
                                                             <td>{{ $order->payment_method }}</td>

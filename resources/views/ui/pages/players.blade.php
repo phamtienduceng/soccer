@@ -10,16 +10,11 @@
   <div class="col-sm-3 sidebar">
               <div class="card">
     <div class="card-body">
-      <form action="{{ route('admin.player.searchStat') }}" method="POST">
-        @csrf
-        <label for="">Search</label><br>
-        <input type="text" name="search" placeholder="Player name">
-        <button type="submit">Search</button>
-      </form>
+
 
       <hr>
 
-      <form action="{{ route('admin.player.sortStat') }}" method="POST">
+      <form action="{{ route('ui.sort') }}" method="POST">
         @csrf
         <label for="">Sort: </label>
         <select name="sort_by" onchange="this.form.submit()">

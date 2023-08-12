@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
@@ -44,48 +43,54 @@ class ProductController extends Controller
             'products_maxload' => 'required|numeric',
             'products_thumbnails' => 'image|max:2048',
             'products_gallery.*' => 'image|max:2048',
-            // validate each image in the array
             'products_status' => 'required',
         ]);
+        $category = Category::find($validatedData['categories_id']);
+        if (!$category) {
+            return back()->withInput()->with('error', 'Category does not exist.');
+        }
 
-        // Create a new product
-        $product = new Product();
-        $product->products_model = $validatedData['products_model'];
-        $product->categories_id = $validatedData['categories_id'];
-        $product->products_price = $validatedData['products_price'];
-        $product->products_material = $validatedData['products_material'];
-        $product->products_style = $validatedData['products_style'];
-        $product->products_size = $validatedData['products_size'];
-        $product->products_maxload = $validatedData['products_maxload'];
-        $product->products_status = $request->input('products_status', 'inactive');
+        $product = new Product($validatedData);
+
+        // Define base path
+        $basePublicPath = 'images/products';
+        $categoryPath = $basePublicPath . '/' . $category->categories_name;
+        $modelPath = $categoryPath . '/' . $validatedData['products_model'];
 
         // Handle product thumbnail
         if ($request->hasFile('products_thumbnails')) {
             $thumbnail = $request->file('products_thumbnails');
             $thumbnailName = $thumbnail->getClientOriginalName();
-            $thumbnailPath = 'public/images/products/' . $product->category->categories_name . '/' . $product->products_model . '/';
-            $thumbnail->storeAs($thumbnailPath, $thumbnailName);
-            $product->products_thumbnails = 'images/products/' . $product->category->categories_name . '/' . $product->products_model . '/' . $thumbnailName;
-        }
 
+            // Create the directory if it doesn't exist
+            if (!file_exists(public_path($modelPath))) {
+                mkdir(public_path($modelPath), 0777, true);
+            }
+
+            $thumbnail->move(public_path($modelPath), $thumbnailName);
+            $product->products_thumbnails = $modelPath . '/' . $thumbnailName;
+        }
 
         // Handle product gallery
         if ($request->hasFile('products_gallery')) {
             $gallery = $request->file('products_gallery');
-            $galleryPath = 'public/images/products/' . $product->category->categories_name . '/' . $product->products_model . '/';
+
+            // Create the directory if it doesn't exist
+            if (!file_exists(public_path($modelPath))) {
+                mkdir(public_path($modelPath), 0777, true);
+            }
+
             $galleryArray = [];
             foreach ($gallery as $image) {
                 $imageName = $image->getClientOriginalName();
-                $image->storeAs($galleryPath, $imageName);
-                $galleryArray[] = 'images/products/' . $product->category->categories_name . '/' . $product->products_model . '/' . $imageName;
+                $image->move(public_path($modelPath), $imageName);
+                $galleryArray[] = $modelPath . '/' . $imageName;
             }
-            $product->products_gallery = json_encode($galleryArray); // convert the array to a JSON string
+            $product->products_gallery = json_encode($galleryArray);
         }
 
-        // Save the product to the database
         $product->save();
 
-        // Redirect the user back to the product list page
         return redirect()->route('admin.product.list')->with('success', 'Product added successfully.');
     }
 
@@ -172,13 +177,14 @@ class ProductController extends Controller
         return redirect()->route('admin.product.gallery')->with('success', 'Product gallery updated successfully');
     }
 
-    public function delete($id)
-    {
-        $Product = Product::findOrFail($id);
-
-        $Product->delete();
-
-        return redirect()->route('admin.product.list')->with('success-del', 'Product deleted successfully!');
+    public function delete($id) {
+        try {
+            $product = Product::findOrFail($id);
+            $product->delete();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete product ' . $id);
+        }
+        return redirect()->route('admin.product.list')->with('success', 'Product deleted successfully!');
     }
 
     public function index()
@@ -217,10 +223,14 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $searchTerm = $request->input('searchTerm');
-        $products = Product::where('products_model', 'LIKE', $searchTerm . '%')
+
+        // Tìm kiếm sản phẩm chứa từ khóa ở bất kỳ vị trí nào trong tên sản phẩm
+        $products = Product::where('products_model', 'LIKE', '%' . $searchTerm . '%')
             ->where('products_status', 'active')
             ->orderBy('created_at', 'desc')
             ->paginate(12);
+
         return view('ui.pages.product.search', compact('categories', 'products', 'searchTerm'));
     }
+
 }

@@ -39,7 +39,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Phone number (optional)</label>
-                            <input type="text" class="form-control" name="user_phoe">
+                            <input type="text" class="form-control" name="user_phone">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>

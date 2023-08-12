@@ -20,7 +20,9 @@
             <div class="ml-auto">
                 <nav class="site-navigation position-relative text-right" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li><a href="{{ Route('ui.index') }}" class="nav-link">Home</a></li>
+                        <li class="{{ request()->routeIs('ui.index') ? 'active' : '' }}">
+                            <a href="{{ Route('ui.index') }}" class="nav-link">Home</a>
+                        </li>
                         <li class="{{ request()->routeIs('ui.match.index') ? 'active' : '' }}"><a
                                 href="{{ route('ui.match.index') }}" class="nav-link">Matches</a></li>
                         <li><a href="{{ Route('ui.players') }}" class="nav-link">Players</a></li>
@@ -34,6 +36,11 @@
                         <li>
                             <a href="{{ Route('ui.product.index') }}" class="nav-link">Product</a>
                         </li>
+                        @if (session('user_id'))
+                            <li>
+                                <a href="{{route('ui.checkout.viewOrders')}}" class="nav-link">Order</a>
+                            </li>
+                        @endif
                         <li
                             class="{{ request()->routeIs('ui.AuthForm') || request()->routeIs('ui.AuthRegisterForm') ? 'active' : '' }}">
                             @if (!session('user_id'))

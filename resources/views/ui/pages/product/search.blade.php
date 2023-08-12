@@ -23,7 +23,7 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a class="text-white link-body-emphasis text-decoration-none"
-                                href="{{ route('product.index') }}">Product</a>
+                                href="{{ route('ui.product.index') }}">Product</a>
                         </li>
                         <li class="breadcrumb-item active text-white" aria-current="page">
                             Search
@@ -44,7 +44,7 @@
                                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                         <img src="{{ asset($product->products_thumbnails) }}" class="card-img-top"
                                             alt="{{ $product->products_model }}">
-                                        <a href="{{ route('product.show', ['id' => $product->products_model]) }}">
+                                        <a href="{{ route('ui.product.show', ['id' => $product->products_model]) }}">
                                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
                                         </a>
                                     </div>
@@ -65,7 +65,7 @@
                                     <hr class="my-0" />
                                     <div class="card-body">
                                         <div class="d-flex justify-content-evenly align-items-center pb-2 mb-1">
-                                            <a href="{{ route('product.show', ['id' => $product->products_model]) }}"
+                                            <a href="{{ route('ui.product.show', ['id' => $product->products_model]) }}"
                                                 type="button" class="btn btn-primary btn-rounded">Details</a>
                                             <button type="button" class="btn btn-warning btn-rounded">Buy now</button>
                                         </div>

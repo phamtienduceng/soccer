@@ -29,7 +29,6 @@
                                         <div class="row">
                                             <div class="col">
                                                 <p>Name: {{ $shipping->shipping_name }}</p>
-                                                <p>Address: {{ $shipping->shipping_address }}</p>
                                             </div>
                                             <div class="col">
                                                 <p>District: {{ $shipping->shipping_district }}</p>

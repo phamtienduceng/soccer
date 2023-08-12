@@ -27,7 +27,7 @@
                 <tr>
                     <th>#</th>
                     <th>User Name</th>
-                    <!-- Change from "Customer name" to "User Name" -->
+                    <!-- Change from "user name" to "User Name" -->
                     <th>Order date</th>
                     <th>Total amount</th>
                     <th>Status</th>
@@ -39,7 +39,7 @@
                 <tr>
                     <td>{{ $order->order_id }}</td>
                     <td>
-                        {{ $order->user_name ?? $order->shipping_full_name }} <!-- Change from "customer_name" to "user_name" -->
+                        {{ $order->user_name ?? $order->shipping_full_name }} <!-- Change from "user_name" to "user_name" -->
                     </td>
                     <td>{{ $order->created_at }}</td>
                     <td>{{ number_format($order->order_total, 0, '.', ',') }}</td>

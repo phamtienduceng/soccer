@@ -1,15 +1,12 @@
 <?php
 
 
-use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController, BlogController, MatchController,ContactController,EmailController};
-use App\Http\Controllers\ui\{HomeController, uiBlogController, ViewPlayerController, UIMatchesController};
-
-
+use App\Http\Controllers\Admin\{DashboardController, UserController, TeamController, PlayerController, BlogController, MatchController, ContactController, EmailController, ProductController, OrderController};
+use App\Http\Controllers\ui\{HomeController, uiBlogController, ViewPlayerController, UIMatchesController, CartController, CheckoutController, FeedbackController};
 use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-
 
     Route::get('/login', [DashboardController::class, 'AuthForm'])->name('AuthForm');
 
@@ -50,10 +47,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('/playerStat', [PlayerController::class, 'playerStat'])->name('playerStat');
 
-            Route::get('/searchStat', [PlayerController::class, 'searchStat'])->name('searchStat');
-
+            Route::post('/searchStat', [PlayerController::class, 'searchStat'])->name('searchStat');
             Route::post('/sortStat', [PlayerController::class, 'sortStat'])->name('sortStat');
-
         });
 
         Route::resource('/player', PlayerController::class);
@@ -105,71 +100,31 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::put('/{matchId}', [MatchController::class, 'updateScore'])->name('updateScore');
         });
-        
+
         Route::prefix('contact')->name('contact.')->group(function () {
 
             Route::get('', [ContactController::class, 'index'])->name('index');
-
         });
     });
 });
+Route::get('/search', [ContactController::class, 'search'])->name('search');
 
 Route::name('ui.')->group(function () {
-    Route::get('/send-email', [EmailController::class, 'feedback'])->name('feedback');
-
-    Route::post('/send', [EmailController::class, 'send'])->name('send.email');
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
 
-    Route::get('/matches', [HomeController::class, 'matches'])->name('matches');
+        
+        Route::get('/login', [HomeController::class, 'AuthForm'])->name('AuthForm');
 
-    Route::get('/players', [HomeController::class, 'players'])->name('players');
+        Route::post('/login', [HomeController::class, 'AuthPost'])->name('AuthPost');
 
-    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+        Route::get('logout', [HomeController::class, 'AuthOut'])->name('AuthOut');
 
-    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+        Route::get('/register', [HomeController::class, 'AuthRegisterForm'])->name('AuthRegisterForm');
 
-    Route::get('/viewContactDetail/{id}', [ContactController::class, 'viewContactDetail'])->name('viewContactDetail');
+        Route::post('/register', [HomeController::class, 'AuthRegister'])->name('AuthRegister');
 
-    Route::post('/getContactUs', [ContactController::class, 'getContactUs'])->name('getContactUs');
-
-
-    Route::get('/login', [HomeController::class, 'AuthForm'])->name('AuthForm');
-
-    Route::post('/login', [HomeController::class, 'AuthPost'])->name('AuthPost');
-
-    Route::get('logout', [HomeController::class, 'AuthOut'])->name('AuthOut');
-
-    Route::get('/register', [HomeController::class, 'AuthRegisterForm'])->name('AuthRegisterForm');
-
-    Route::post('/register', [HomeController::class, 'AuthRegister'])->name('AuthRegister');
-
-    Route::get('/players', [ViewPlayerController::class, 'index'])->name('players');
-
-    Route::post('/players/search', [ViewPlayerController::class, 'search'])->name('players.search');
-
-    Route::post('/sort-players', [ViewPlayerController::class, 'sort'])->name('sort');
-
-    Route::get('/filter-players', [ViewPlayerController::class, 'filter'])->name('filter');
-
-    Route::get('/pl/{id}', [ViewPlayerController::class, 'detailPlayer'])->name('detailPlayer');
-
-    Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
-
-    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
-    Route::get('/agent-system', [HomeController::class, 'agentSystem'])->name('agentSystem');
-
-    // Route cho trang Cart
-    Route::get('/cart', function () {
-        return view('ui.pages.cart.index');
-    })->name('cart');
-
-    // Route cho trang Product
-    Route::get('/product', function () {
-        return view('ui.pages.product.index');
-    })->name('ui.product');
-
+        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -195,7 +150,55 @@ Route::name('ui.')->group(function () {
         Route::get('/your-order', [CheckoutController::class, 'viewOrders'])->name('viewOrders');
     });
 
+    
+    Route::prefix('checkout')->name('checkout.')->group(function () {
+        Route::get('/shipping-details', [CheckoutController::class, 'shipping'])->name('shipping');
+        Route::post('/shipping-details-confirm', [CheckoutController::class, 'confirmShipping'])->name('confirm_shipping');
+        Route::get('/payment-methods', [CheckoutController::class, 'payment'])->name('payment');
+        Route::post('/payment-methods', [CheckoutController::class, 'confirmPayment'])->name('confirm_payment');
+        Route::get('/thank-you', [CheckoutController::class, 'complete'])->name('complete');
+        Route::post('/thank-you', [CheckoutController::class, 'destroy'])->name('destroy');
+        Route::get('/your-order', [CheckoutController::class, 'viewOrders'])->name('viewOrders');
+    });
+
     Route::prefix('match')->name('match.')->group(function () {
         Route::get('/', [UIMatchesController::class, 'index'])->name('index');
     });
+
+    Route::get('/send-email', [EmailController::class, 'feedback'])->name('feedback');
+
+    Route::post('/send', [EmailController::class, 'send'])->name('send.email');
+
+    
+
+    Route::get('/matches', [HomeController::class, 'matches'])->name('matches');
+
+    Route::get('/players', [ViewPlayerController::class, 'index'])->name('players');
+
+    Route::get('/players', [ViewPlayerController::class, 'index'])->name('players');
+
+    Route::post('/players/search', [ViewPlayerController::class, 'search'])->name('players.search');
+
+    Route::post('/sort-players', [ViewPlayerController::class, 'sort'])->name('sort');
+
+    Route::get('/filter-players', [ViewPlayerController::class, 'filter'])->name('filter');
+
+    Route::get('/pl/{id}', [ViewPlayerController::class, 'detailPlayer'])->name('detailPlayer');
+
+
+    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+    Route::get('/viewContactDetail/{id}', [ContactController::class, 'viewContactDetail'])->name('viewContactDetail');
+
+    Route::post('/getContactUs', [ContactController::class, 'getContactUs'])->name('getContactUs');
+
+
+    Route::get('/blog', [uiBlogController::class, 'index'])->name('blog.index');
+
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+    Route::get('/agent-system', [HomeController::class, 'agentSystem'])->name('agentSystem');
+
 });

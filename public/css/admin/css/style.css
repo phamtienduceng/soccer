@@ -17166,7 +17166,7 @@ body {
   box-shadow: none;
 }
 
-.card-customer .hct-icon {
+.card-user .hct-icon {
   width: 70px;
   height: 70px;
   justify-content: center;
@@ -17176,21 +17176,21 @@ body {
   box-shadow: none;
 }
 @media screen and (max-width: 375px) {
-  .card-customer .hct-icon {
+  .card-user .hct-icon {
     width: 80px;
     height: 80px;
     font-size: 50px;
   }
 }
 
-.ticket-customer .tick-icon {
+.ticket-user .tick-icon {
   position: absolute;
   opacity: 0.2;
   right: 32px;
   bottom: 30px;
 }
 
-.customer-visitor .vis-icon {
+.user-visitor .vis-icon {
   opacity: 0.2;
   width: 120px;
   height: 120px;

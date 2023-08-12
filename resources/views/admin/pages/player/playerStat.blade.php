@@ -27,7 +27,8 @@
 
         <div class="col-sm-4">
     <div class="card-body">
-        <form action="{{ route('admin.player.searchStat') }}" method="GET">
+        <form action="{{ route('admin.player.searchStat') }}" method="POST">
+            @csrf
             <label for="">Search player: </label>
             <input type="text" name="search">
             <button type="submit">Search</button>

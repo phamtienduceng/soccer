@@ -13,7 +13,7 @@ class Order extends Model
         'order_status',
         'shipping_id',
         'payment_id',
-        'customer_id',
+        'user_id',
         'order_total',
     ];
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
     public function list()
     {
         $categories = Category::all();
@@ -34,8 +35,14 @@ class CategoryController extends Controller
         if ($request->hasFile('categories_thumbnails')) {
             $thumbnails = $request->file('categories_thumbnails');
             $thumbnailsName = $thumbnails->getClientOriginalName();
-            $thumbnailsPath = $thumbnails->storeAs('public/images/products/' . $category->categories_name, $thumbnailsName);
-            $category->categories_thumbnails = str_replace('public/', '', $thumbnailsPath);
+
+            $targetDirectory = 'C:\xampp\htdocs\soccer\App\public\images\products\\' . $category->categories_name;
+            if (!file_exists($targetDirectory)) {
+                mkdir($targetDirectory, 0777, true);
+            }
+
+            $thumbnails->move($targetDirectory, $thumbnailsName);
+            $category->categories_thumbnails = 'images/products/' . $category->categories_name . '/' . $thumbnailsName;
         }
 
         if ($category->save()) {
@@ -48,7 +55,6 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-
         return view('admin.pages.categories.edit', compact('category'));
     }
 
@@ -61,16 +67,20 @@ class CategoryController extends Controller
         ]);
 
         $category = Category::findOrFail($id);
-
         $category->categories_name = $request->input('categories_name');
         $category->categories_status = $request->input('categories_status');
 
         if ($request->hasFile('categories_thumbnails')) {
             $image = $request->file('categories_thumbnails');
             $imageName = $image->getClientOriginalName();
-            $imagePath = 'images/products/' . $category->categories_name . '/' . $imageName;
-            $image->storeAs('public/' . $imagePath);
-            $category->categories_thumbnails = $imagePath;
+
+            $targetDirectory = 'C:\xampp\htdocs\soccer\App\public\images\products\\' . $category->categories_name;
+            if (!file_exists($targetDirectory)) {
+                mkdir($targetDirectory, 0777, true);
+            }
+
+            $image->move($targetDirectory, $imageName);
+            $category->categories_thumbnails = 'images/products/' . $category->categories_name . '/' . $imageName;
         }
 
         $category->save();
@@ -81,7 +91,6 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = Category::findOrFail($id);
-
         $category->delete();
 
         return redirect()->route('admin.category.list')->with('success-del', 'Category deleted successfully!');

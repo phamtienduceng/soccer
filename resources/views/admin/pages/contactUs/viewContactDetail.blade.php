@@ -30,21 +30,26 @@
                     </div>
                     <div class="card-body">
                     <div class="card-body">
-                <div class="">
+                <div class="form-group">
                     <label for="title" class="label">Name:</label> <span>{{$contact->name}}</span>
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="price" class="label">Email:</label> <span>{{$contact->email}}</span>
                 </div>
 
-                <div class="">
+                <div class="form-group">
                     <label for="description" class="label">Subject:</label> <span>{{$contact->subject}}</span>
                 </div>
-                <div class="">
+                <div class="form-group">
                     <label for="description" class="label">Message:</label> <span>{{$contact->message}}</span>
                 </div>
-                <a href="{{ Route('ui.feedback')}}"><input type="button" class="btn btn-success" value="view"></a>
-            </div>
+                <div class="form-group">
+                <a href="{{ Route('ui.feedback')}}"> 
+                    <button type="submit" class="btn btn-primary ">
+                             Send
+                    </button></a>
+                </div>
+                        </div>
                     </tbody>
                             </table>
                         </div>

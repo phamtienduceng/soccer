@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
@@ -26,15 +26,15 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('zip_code')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('is_active')->default(true); // to check if the customer is active or not
+            $table->boolean('is_active')->default(true); // to check if the user is active or not
             $table->rememberToken();
             $table->string('referral_code')->nullable(); // If you have a referral system
-            $table->unsignedBigInteger('referred_by')->nullable(); // ID of the user who referred this customer
+            $table->unsignedBigInteger('referred_by')->nullable(); // ID of the user who referred this user
             $table->timestamps();
             $table->softDeletes(); // If you want to implement soft delete
 
             // Foreign key for the referral system
-            $table->foreign('referred_by')->references('id')->on('customers')->onDelete('set null');
+            $table->foreign('referred_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('users');
     }
 };

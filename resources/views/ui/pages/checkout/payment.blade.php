@@ -15,7 +15,7 @@
 
                             <div class="card-header py-1">
 
-                                @if (!session('customer_id'))
+                                @if (!session('user_id'))
                                     <div class="nav-pills mb-3">
                                         <p class="nav-link active" aria-selected="true">
                                             Please log in to easily access your order and payment history.

@@ -14,7 +14,7 @@
 
                             <div class="card-header py-1">
 
-                                @if (!session('customer_id'))
+                                @if (!session('user_id'))
                                     <div class="nav-pills mb-3">
                                         <p class="nav-link active" aria-selected="true">
                                             Please log in to easily access your order and payment history.
@@ -38,7 +38,7 @@
                                                     class="form-control @error('shipping_full_name') is-invalid @enderror md-form"
                                                     id="shipping_full_name" placeholder="First and last name"
                                                     name="shipping_full_name"
-                                                    value="{{ isset($customer_name) ? $customer_name : old('shipping_full_name') }}"
+                                                    value="{{ isset($user_name) ? $user_name : old('shipping_full_name') }}"
                                                     required>
                                                 <label for="shipping_full_name">First and last name</label>
                                                 @error('shipping_full_name')
@@ -55,7 +55,9 @@
                                                     <input type="email"
                                                         class="form-control @error('shipping_email') is-invalid @enderror md-form"
                                                         id="shipping_email" placeholder="name@example.com"
-                                                        name="shipping_email" value="{{ isset($customer_email) ? $customer_email : old('shipping_email') }}" required>
+                                                        name="shipping_email"
+                                                        value="{{ isset($user_email) ? $user_email : old('shipping_email') }}"
+                                                        required>
                                                     <label for="shipping_email">Email</label>
                                                     @error('shipping_email')
                                                         <div class="invalid-feedback">
@@ -70,7 +72,8 @@
                                                         class="form-control @error('shipping_phone_number') is-invalid @enderror md-form"
                                                         id="shipping_phone_number" placeholder="0123456789"
                                                         name="shipping_phone_number"
-                                                        value="{{ isset($customer_phone) ? $customer_phone : old('shipping_phone_number') }}" required maxlength="10">
+                                                        value="{{ isset($user_phone) ? $user_phone : old('shipping_phone_number') }}"
+                                                        required maxlength="10">
                                                     <label for="shipping_phone_number">Phone number</label>
                                                     @error('shipping_phone_number')
                                                         <div class="invalid-feedback">
@@ -80,21 +83,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--<div class="mb-3">
+                                                <div class="form-floating">
+                                                    <input type="text"
+                                                           class="form-control @error('shipping_address') is-invalid @enderror"
+                                                           id="shipping_address"
+                                                           placeholder="Address"
+                                                           name="shipping_address"
+                                                            value="{{ isset($user_address) ? $user_address : old('shipping_address') }}" required>
+                                                           
+                                                    <label for="shipping_address">Address</label>
+                                                    @error('shipping_address')
+        <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+    @enderror
+                                                </div>
+                                            </div>-->
 
-                                        <div class="mb-3">
-                                            <div class="form-floating">
-                                                <input type="text"
-                                                    class="form-control @error('shipping_address') is-invalid @enderror md-form"
-                                                    id="shipping_address" placeholder="Address" name="shipping_address"
-                                                    value="{{ old('shipping_address') }}" required>
-                                                <label for="shipping_address">Address</label>
-                                                @error('shipping_address')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
 
                                         <div class="row">
                                             <div class="col-md mb-3">

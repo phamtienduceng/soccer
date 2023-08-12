@@ -13,7 +13,7 @@ class OrderController extends Controller
     public function list(Request $request)
     {
         $orders = DB::table('orders')
-            ->leftJoin('users', 'orders.customer_id', '=', 'users.user_id') // Changed to 'users.user_id'
+            ->leftJoin('users', 'orders.user_id', '=', 'users.user_id') // Changed to 'users.user_id'
             ->leftJoin('shipping_details', 'orders.shipping_id', '=', 'shipping_details.shipping_id')
             ->select('orders.*', 'users.user_name as name', 'shipping_details.shipping_full_name') // Changed to 'users.user_name'
             ->orderBy('orders.created_at', 'desc')
@@ -27,11 +27,12 @@ class OrderController extends Controller
         $order = DB::table('orders')
             ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
             ->join('shipping_details', 'orders.shipping_id', '=', 'shipping_details.shipping_id')
-            ->leftJoin('users', 'orders.customer_id', '=', 'users.user_id') // Changed to 'users.user_id'
+            ->leftJoin('users', 'orders.user_id', '=', 'users.user_id') // Changed to 'users.user_id'
             ->join('payments', 'orders.payment_id', '=', 'payments.payment_id')
             ->select('orders.*', 'order_details.*', 'shipping_details.*', 'users.*', 'payments.*', 'orders.created_at') // Updated to include 'users.*'
             ->where('orders.order_id', $id)
             ->get();
+        return view('admin.pages.orders.details', compact('order'));
     }
 
     public function update_status(Request $request, $id)

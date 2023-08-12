@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('shipping_full_name');
             $table->string('shipping_email');
             $table->string('shipping_phone_number', 10);
-            $table->string('shipping_address');
             $table->string('shipping_province');
             $table->string('shipping_district');
             $table->timestamps();

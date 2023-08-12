@@ -1,5 +1,5 @@
 @extends('ui.layouts.app')
-@section('title', 'Home')
+@section('title', 'Match')
 
 @section('content')
     <div class="hero overlay" style="background-image: url('{{ asset('css/ui/images/bg_3.jpg') }}');">
@@ -21,13 +21,15 @@
                         </span>
                         <div class="team-1 w-50">
                             <div class="team-details w-100 text-center">
-                                <img src="{{ asset('css/ui/images/'.$randomMatch->homeTeam->logo) }}" alt="Image" class="img-fluid mb-2">
+                                <img src="{{ asset('css/ui/images/' . $randomMatch->homeTeam->logo) }}" alt="Image"
+                                    class="img-fluid mb-2">
                                 <h3>{{ $randomMatch->homeTeam->team_name }}</h3>
                             </div>
                         </div>
                         <div class="team-2 w-50">
                             <div class="team-details w-100 text-center">
-                                <img src="{{ asset('css/ui/images/'.$randomMatch->awayTeam->logo) }}" alt="Image" class="img-fluid mb-2">
+                                <img src="{{ asset('css/ui/images/' . $randomMatch->awayTeam->logo) }}" alt="Image"
+                                    class="img-fluid mb-2">
                                 <h3>{{ $randomMatch->awayTeam->team_name }}</h3>
                             </div>
                         </div>
@@ -118,14 +120,16 @@
                             <div class="widget-vs">
                                 <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
                                     <div class="team-1 text-center">
-                                        <img src="{{ asset('css/ui/images/'.$nextMatch->homeTeam->logo) }}" alt="Image" class="img-fluid mb-2">
+                                        <img src="{{ asset('css/ui/images/' . $nextMatch->homeTeam->logo) }}"
+                                            alt="Image" class="img-fluid mb-2">
                                         <h3>{{ $nextMatch->homeTeam->team_name }}</h3>
                                     </div>
                                     <div>
                                         <span class="vs"><span>VS</span></span>
                                     </div>
                                     <div class="team-2 text-center">
-                                        <img src="{{ asset('css/ui/images/'.$nextMatch->awayTeam->logo) }}" alt="Image" class="img-fluid mb-2">
+                                        <img src="{{ asset('css/ui/images/' . $nextMatch->awayTeam->logo) }}"
+                                            alt="Image" class="img-fluid mb-2">
                                         <h3>{{ $nextMatch->awayTeam->team_name }}</h3>
                                     </div>
                                 </div>
@@ -157,14 +161,16 @@
                                     <div
                                         class="d-flex align-items-center justify-content-around justify-content-between w-100">
                                         <div class="team-1 text-center">
-                                            <img src="{{ asset('css/ui/images/'.$match->homeTeam->logo) }}" alt="Image" class="img-fluid mb-2">
+                                            <img src="{{ asset('css/ui/images/' . $match->homeTeam->logo) }}"
+                                                alt="Image" class="img-fluid mb-2">
                                             <h3>{{ $match->homeTeam->team_name }}</h3>
                                         </div>
                                         <div>
                                             <span class="vs"><span>VS</span></span>
                                         </div>
                                         <div class="team-2 text-center">
-                                            <img src="{{ asset('css/ui/images/'. $match->awayTeam->logo )}}" alt="Image" class="img-fluid mb-2">
+                                            <img src="{{ asset('css/ui/images/' . $match->awayTeam->logo) }}"
+                                                alt="Image" class="img-fluid mb-2">
                                             <h3>{{ $match->awayTeam->team_name }}</h3>
                                         </div>
                                     </div>

@@ -39,4 +39,13 @@ class ContactController extends Controller
 
         return view('admin.pages.contactUs.viewContactDetail', compact('contact'));
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $contacts = Contact::where('name', 'like', '%' . $searchTerm . '%')->paginate(10);
+    
+        return view('admin.pages.contactUs.index', compact('contacts'));
+    }
 }

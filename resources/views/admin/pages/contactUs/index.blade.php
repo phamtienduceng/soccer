@@ -27,8 +27,13 @@
                 <div class="card">
                     <div class="card-header text-center">
                         <h5 class="fw-bold">Admin</h5>
-                    </div>
+                   
+
                     <div class="card-body">
+                    <form action="{{ route('search') }}" method="GET">
+        <input type="text" name="search" placeholder="Search by name">
+        <button type="submit">Search</button>
+    </form>
                         <div class="table-responsive">
                             <table class="table text-center">
                             <thead>
@@ -37,7 +42,6 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Subject</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,9 +52,10 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->subject}}</td>
-                            <td></td>
                             <td>
-                                <a href="{{ Route('ui.viewContactDetail', $item->id)}}"><input type="button" class="btn btn-success" value="view"></a>
+                            <a href="{{ Route('ui.viewContactDetail', $item->id)}}" type="button" class="btn btn-link"
+                           >
+                            <input type="button" class="fa fa-eye text-primary" ></a>
                             </td>
                         </tr>
                         @endforeach

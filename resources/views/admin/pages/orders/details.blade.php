@@ -91,9 +91,9 @@
                             @if (count($order) != 0)
                                 <tr>
                                     <th>Name</th>
-                                    @if (!is_null($order[0]->customer_id))
+                                    @if (!is_null($order[0]->user_id))
                                         <td>
-                                            {{ $order[0]->customer_name }}
+                                            {{ $order[0]->user_name }}
                                         </td>
                                     @else
                                         <td>
@@ -101,12 +101,6 @@
                                         </td>
                                     @endif
 
-                                </tr>
-                                <tr>
-                                    <th>Address</th>
-                                    <td>
-                                        {{ $order[0]->shipping_address }}
-                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Province</th>
